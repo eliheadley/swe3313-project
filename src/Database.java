@@ -1,7 +1,8 @@
 import java.sql.*;
 
 public class Database{
-    private static final String URL = "jdbc:hsqldb:hsql://localhost/";
+    // Old URL: "jdbc:hsqldb:hsql://localhost/"
+    private static final String URL = "jdbc:hsqldb:file:c:/Users/elihe/OneDrive/projects/swe3313-project/database/PizzaShop";
     private Connection conn = null;
     private String sql = "";
     private PreparedStatement pstmt = null;
@@ -26,7 +27,7 @@ public class Database{
         }catch(SQLException sqle){
             return null;            
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();;
         }
         return querry;
     }

@@ -7,7 +7,7 @@ public class LoginPage {
 
     public static void login(boolean visible){
         Database db = new Database();
-        UserPage up = new UserPage();
+        //UserPage up = new UserPage();
 
         JFrame login = new JFrame();
         //Create text fields to input data

@@ -1,70 +1,84 @@
+import java.awt.Toolkit;
 import java.awt.event.*;
+import java.awt.Dimension;
 import javax.swing.*;
-public class LoginPage {
-    static String phoneNumber;
-    static String password;
-    static String[] user;
+import java.awt.Color;
 
-    public static void login(boolean visible){
-        Database db = new Database();
-        UserPage up = new UserPage();
-
-        JFrame login = new JFrame();
+public class LoginPage extends JFrame implements ActionListener {
+    String phoneNumber, password;
+    String[] user;
+    Database db;
+    //Create textfields
+    JTextField txtIn1, txtIn2;
+    //Create buttons
+    JButton b1, b2, b3;
+    public LoginPage(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int h5p = (int)(screenSize.getHeight() * 0.05);
+        int w5p = (int)(screenSize.getWidth() * 0.05);
+        db = new Database();
         //Create text fields to input data
-        final JTextField txtIn1 = new JTextField();
-        txtIn1.setBounds(105, 25, 170, 20);
-        final JTextField txtIn2 = new JTextField();
-        txtIn2.setBounds(105, 75, 170, 20);
+        txtIn1 = new JTextField();
+        txtIn1.setBounds(9*w5p, 4*h5p, 170, 20);
 
-        
+        txtIn2 = new JTextField();
+        txtIn2.setBounds(9*w5p, 5*h5p, 170, 20);
+
         //Create login button
-        JButton b1 = new JButton("Login");
-        b1.setBounds(145,125,120,30);//x axis, y axis, width, height
-
+        b1 = new JButton("Login");
+        b1.setBounds((9*w5p)+40, 6*h5p, 80, 30);//x axis, y axis, width, height
+        b1.setBackground(Color.decode("#e06666"));  
+        b1.addActionListener(this);
         //Creat clear button
-        JButton b2 = new JButton("Clear");
-        b2.setBounds(165,180,80,30);
-
-    
-        //Login button action
-        b1.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                phoneNumber = txtIn1.getText();
-                password = txtIn2.getText();
-                user = db.getUser(phoneNumber, password);
-                /*if(user[0] != null){
-                    txtOut1.setText(user[2]);
-                    txtOut2.setText(user[3]);
-                    txtOut3.setText(user[4]);
-                    txtOut4.setText(user[5]);
-                }else{
-                    txtIn1.setText("Invalid Username or Password");
-                    txtIn2.setText("Invalid Username or Password");
-                } */              
-            }
-        }
-        );
-
-        //Clear button action
-        b2.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                txtIn1.setText("");
-                txtIn2.setText("");
-            }
-        });
-
+        b2 = new JButton("Clear");
+        b2.setBounds((9*w5p)+40, 7*h5p,80,30);
+        b2.setBackground(Color.decode("#e06666"));  
+        b2.addActionListener(this);
+        //Create back button
+        b3 = new JButton("Back");
+        b3.setBounds(w5p, h5p, 80, 30);
+        b3.setBackground(Color.decode("#e06666"));
+        b3.addActionListener(this);
         //add all elements to JFrame
-        login.add(b1);
-        login.add(b2);
-        login.add(txtIn1);
-        login.add(txtIn2);
-        login.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        login.setLayout(null);
-        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.add(txtIn1);
+        this.add(txtIn2);
+        this.add(b1);
+        this.add(b2);
+        this.add(b3);
+        //Set layout
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(false);
+        setBackground(Color.decode("#cccccc"));
+    }
+
+    public void showLogin(boolean visible){              
         if(visible){
-            login.setVisible(true);
-        }else{
-            login.setVisible(false);
+            this.setVisible(true);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e){
+        //Login button action
+        if(e.getActionCommand().equals("Login")){
+            phoneNumber = txtIn1.getText();
+            password = txtIn2.getText();
+            user = db.getUser(phoneNumber, password);
+            if(user[0] != null){
+                txtIn1.setText("Correct!");
+            }else{
+                txtIn1.setText("Invalid Username or Password");
+                txtIn2.setText("Invalid Username or Password");
+            } 
+        //Clear button action
+        }else if(e.getActionCommand().equals("Clear")){
+            txtIn1.setText("");
+            txtIn2.setText("");
+        }else if(e.getActionCommand().equals("Back")){
+            new MainPage().showMain(true);
+            this.dispose();
         }
     }
     

@@ -1,3 +1,5 @@
+package swe3313;
+
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;

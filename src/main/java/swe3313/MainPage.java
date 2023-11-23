@@ -1,6 +1,11 @@
+package swe3313;
+
 import java.awt.event.*;
+import java.io.InputStream;
 import java.awt.Color;
 import java.awt.Font;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class MainPage extends Page implements ActionListener {      
@@ -53,7 +58,15 @@ public class MainPage extends Page implements ActionListener {
         b1.addActionListener(this);
         b2.addActionListener(this);
         //Create logo using a icon
-        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
+        try {
+        InputStream stream = getClass().getResourceAsStream("/Mom & Pizza.png");
+        img = new JLabel(new ImageIcon(ImageIO.read(stream)));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
         img.setBounds((7*w5p), 3*h5p, 438, 438);
         //add elements to page
         this.add(img);

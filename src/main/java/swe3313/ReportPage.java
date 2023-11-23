@@ -1,3 +1,5 @@
+package swe3313;
+
 import java.awt.Color;
 import javax.swing.*;
 import java.awt.FlowLayout;

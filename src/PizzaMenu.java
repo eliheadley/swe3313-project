@@ -264,7 +264,7 @@ public class PizzaMenu extends Page implements ActionListener {
            new ExtrasMenu().showExtrasMenu(true);
            this.dispose();
        }else if(e.getActionCommand().equals("Add to Order")){
-            this.dispose();
+        
        }
     }
 

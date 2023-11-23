@@ -25,6 +25,7 @@ public class PizzaMenu extends Page implements ActionListener {
         title = new JLabel("Pizza Menu");
         title.setBounds((8*w5p), h5p, 700, 60);
         title.setFont(titleFont);
+        
         //create the toppingsPanel and the leftPanel for crust and size
         toppingsLabel = new JLabel("Toppings:");
         toppingsLabel.setBounds(11*w5p, 6*h5p, 200, 60);

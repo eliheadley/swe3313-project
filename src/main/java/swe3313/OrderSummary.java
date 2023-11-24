@@ -176,10 +176,15 @@ public class OrderSummary extends Page implements ActionListener{
         if(e.getActionCommand().equals("Back")){
             new PizzaMenu().showPizzaMenu(true);
             this.dispose();
+        }
          // check out button
-        }else if(e.getActionCommand().equals("Check Out")){
+        if(e.getActionCommand().equals("Check Out")){
+            new PaymentMethod().showPaymentMethod(true);
             this.dispose();
         }
+
+    
      }
+    
 
 }

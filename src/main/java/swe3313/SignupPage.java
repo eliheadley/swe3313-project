@@ -4,9 +4,6 @@ import java.awt.event.*;
 import java.awt.Font;
 import javax.swing.*;
 
-import swe3313.Database;
-import swe3313.PizzaMenu;
-
 import java.awt.Color;
 
 public class SignupPage extends Page implements ActionListener{

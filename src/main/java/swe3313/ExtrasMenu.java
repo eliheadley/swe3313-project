@@ -182,11 +182,17 @@ public class ExtrasMenu extends Page implements ActionListener {
          }
     }
 
+    //back button
     @Override
     public void actionPerformed(ActionEvent e){
-        //Checkboxes
+        //back button
         if(e.getActionCommand().equals("Back")){
             new PizzaMenu().showPizzaMenu(true);
+            this.dispose();
+        }
+        //finish button
+        if(e.getActionCommand().equals("Finish")){
+            new OrderSummary().showOrdrSmry(true);
             this.dispose();
         }
     }

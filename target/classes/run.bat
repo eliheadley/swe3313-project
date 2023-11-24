@@ -1,0 +1,1 @@
+java -cp ".;.\hsqldb-2.7.2.jar;.\swe3313-1.0.jar" swe3313.Main

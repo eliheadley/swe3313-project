@@ -197,11 +197,9 @@ public class ExtrasMenu extends Page implements ActionListener {
 
         if(e.getActionCommand().equals("Back")){
             new PizzaMenu().showPizzaMenu(true);
-            this.dispose();
-         
-         
+            this.dispose();        
         }else if(e.getActionCommand().equals("Finish")){
-            new OrderSummary().showOrdrSmry(true);
+            new OrderSummary().showOrderSummary(true);
             this.dispose();
         //Checkboxes
         }else if(e.getActionCommand().equals("Small")){
@@ -220,11 +218,6 @@ public class ExtrasMenu extends Page implements ActionListener {
                   medium.setSelected(false);
                }
     
-        }
-        //finish button
-        if(e.getActionCommand().equals("Finish")){
-            new OrderSummary().showOrdrSmry(true);
-            this.dispose();
         }
     }
 }

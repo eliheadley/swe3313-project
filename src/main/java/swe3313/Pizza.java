@@ -18,4 +18,18 @@ public class Pizza {
         other = o;
     }
 
+    @Override
+    public String toString(){
+        String s = size + " pizza with " + crust + " crust, ";
+        for(String x : toppingsVeg){
+            s += x + ", ";
+        }
+        for(int i = 0; i < toppingsMeat.size(); i++){
+            s += toppingsMeat.get(i) + ", ";
+        }
+        s += "and " + other.get(toppingsMeat.size()-1);
+
+        return s;
+    }
+
 }

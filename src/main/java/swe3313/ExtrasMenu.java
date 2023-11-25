@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ExtrasMenu extends Page implements ActionListener {
     JPanel rightPanel, drinkChoices, drinkSizes, leftPanel, pepsi_oragange, rtBeer_lemonade;
-    JLabel drinksLabel, drinkSizeLabel, sidesLabel, title;
+    JLabel drinksLabel, drinkSizeLabel, sidesLabel, title, pricing;
     JCheckBox pepsi, dietPepsi, orange, dietOrange, rootBeer, dietRB, sierraMist, lemonade, small,
     medium, large, breadSticks, breadSticksBites, cookie;
     JButton finishButton, backButton, addToOrderButton;
@@ -22,12 +22,12 @@ public class ExtrasMenu extends Page implements ActionListener {
         checkBoxFont = new Font("Impact", Font.PLAIN, 24);
 
         rightPanel = new JPanel(new GridLayout(2, 1)); // Use a 1x3 grid layout
-        rightPanel.setBounds(8*w5p, 7*h5p, 900, 400);
+        rightPanel.setBounds(8*w5p, 7*h5p, 50*w1p, 45*h1p);
 
         //sub panels
         drinkChoices = new JPanel(new GridLayout(1,2));
         drinkChoices.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10)); // Add some space
-        drinkChoices.setPreferredSize(new Dimension(100, 150));
+        drinkChoices.setPreferredSize(new Dimension(10*w1p, 20*h1p));
         drinkChoices.setBackground(Color.decode("#cccccc"));
         //create sub panels for first drink column and second drink column
         pepsi_oragange = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -37,14 +37,13 @@ public class ExtrasMenu extends Page implements ActionListener {
         rtBeer_lemonade.setBackground(Color.decode("#cccccc"));
         rtBeer_lemonade.setLayout(new BoxLayout(rtBeer_lemonade, BoxLayout.Y_AXIS)); // Vertical layout
 
-        drinkSizes = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        drinkSizes.setLayout(new BoxLayout(drinkSizes, BoxLayout.Y_AXIS)); // Vertical layout
+        drinkSizes = new JPanel(new FlowLayout(FlowLayout.LEFT));
         drinkSizes.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         drinkSizes.setBackground(Color.decode("#cccccc"));
 
         drinksLabel = new JLabel("Drinks:");
         drinksLabel.setFont(font1);
-        drinksLabel.setBounds((8*w5p)+20, 5*h5p, 300, 100);
+        drinksLabel.setBounds(41*w1p, 5*h5p, 30*w1p, 10*h1p);
 
         // create check boxes for drink menu
         pepsi = new JCheckBox("Pepsi");
@@ -64,16 +63,19 @@ public class ExtrasMenu extends Page implements ActionListener {
         lemonade = new JCheckBox("Lemonade");
         lemonade.setFont(checkBoxFont);
 
-        drinkSizeLabel = new JLabel("Size:");
+        drinkSizeLabel = new JLabel("Size:  ");
         drinkSizeLabel.setFont(font1);
         drinkSizes.add(drinkSizeLabel);
 
-        small = new JCheckBox("Small");
+        small = new JCheckBox("Small  ");
         small.setFont(checkBoxFont);
-        medium = new JCheckBox("Medium");
+        small.addActionListener(this);
+        medium = new JCheckBox("Medium  ");
         medium.setFont(checkBoxFont);
-        large = new JCheckBox("Large");
+        medium.addActionListener(this);
+        large = new JCheckBox("Large  ");
         large.setFont(checkBoxFont);
+        large.addActionListener(this);
         
         // add drink choice check boxes to panel
         pepsi_oragange.add(pepsi);
@@ -99,7 +101,7 @@ public class ExtrasMenu extends Page implements ActionListener {
         // create left panel to hold sides
         leftPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS)); // Vertical layout
-        leftPanel.setBounds(2*w5p, 6*h5p, 350, 400);
+        leftPanel.setBounds(2*w5p, 6*h5p, 30*w1p, 50*h1p);
 
         // create lable for sides and add to panel
         sidesLabel = new JLabel("Sides:");
@@ -121,26 +123,31 @@ public class ExtrasMenu extends Page implements ActionListener {
 
         //create finish button and set layout
         finishButton = new JButton("Finish");
-        finishButton.setBounds((17*w5p)+10,h5p,150,50);
+        finishButton.setBounds(87*w1p,h5p,10*w1p, 7*h1p);
         finishButton.setBackground(Color.decode("#e06666"));
         finishButton.setFont(buttonFont);
         finishButton.addActionListener(this);
         //create back button and set layout
         backButton = new JButton("Back");
-        backButton.setBounds(w5p, h5p, 150,50);
+        backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
         backButton.setBackground(Color.decode("#e06666"));
         backButton.setFont(buttonFont);
         backButton.addActionListener(this);
         //create addToOrderButton and set layout
         addToOrderButton = new JButton("Add to Order");
-        addToOrderButton.setBounds((17*w5p)+10,17*h5p,150,50);
+        addToOrderButton.setBounds(87*w1p,17*h5p,10*w1p, 7*h1p);
         addToOrderButton.setBackground(Color.decode("#e06666"));
         addToOrderButton.setFont(buttonFont);
 
         // create title
         title = new JLabel("Extras");
         title.setFont(titleFont);
-        title.setBounds((9*w5p), h5p, 500, 60);
+        title.setBounds((9*w5p), h5p, 30*w1p, 7*h1p);
+
+        // create pricing JLabel
+        pricing = new JLabel("Pricing: all drinks are $1 for any size");
+        pricing.setFont(new Font("Impact", Font.PLAIN, 24));
+        pricing.setBounds(52*w1p, 29*h1p, 40*w1p, 7*h1p);
 
         // set background for all elements
         pepsi.setBackground(Color.decode("#cccccc"));
@@ -169,6 +176,7 @@ public class ExtrasMenu extends Page implements ActionListener {
         this.add(rightPanel);
         this.add(leftPanel);
         this.add(drinksLabel);
+        this.add(pricing);
         this.setVisible(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -186,9 +194,32 @@ public class ExtrasMenu extends Page implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         //back button
+
         if(e.getActionCommand().equals("Back")){
             new PizzaMenu().showPizzaMenu(true);
             this.dispose();
+         
+         
+        }else if(e.getActionCommand().equals("Finish")){
+            new OrderSummary().showOrdrSmry(true);
+            this.dispose();
+        //Checkboxes
+        }else if(e.getActionCommand().equals("Small")){
+            if (small.isSelected()) {
+                      medium.setSelected(false);
+                      large.setSelected(false);
+              }
+        }else if(e.getActionCommand().equals("Medium")){
+              if (medium.isSelected()) {
+                  small.setSelected(false);
+                  large.setSelected(false);
+              }
+        }else if(e.getActionCommand().equals("Large")){
+              if (large.isSelected()) {
+                  small.setSelected(false);
+                  medium.setSelected(false);
+               }
+    
         }
         //finish button
         if(e.getActionCommand().equals("Finish")){

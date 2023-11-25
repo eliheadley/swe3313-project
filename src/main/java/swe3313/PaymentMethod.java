@@ -23,7 +23,7 @@ public class PaymentMethod extends Page implements ActionListener{
 
         // create title
         title = new JLabel("Confirm Payment Method");
-        title.setBounds((6*w5p), h5p, 700, 60);
+        title.setBounds((6*w5p), h5p, 800, 60);
         title.setFont(titleFont);
 
         /*  !!! Create logo using a icon
@@ -45,6 +45,7 @@ public class PaymentMethod extends Page implements ActionListener{
         //credit/debit checkbox
         credit = new JCheckBox("                                                                                                                      Credit/Debit");
         credit.setFont(checkBoxFont);
+        credit.setBackground(Color.decode("#cccccc"));
         
         // make pay in person label
         label2 = new JLabel("Pay In Person");
@@ -60,7 +61,9 @@ public class PaymentMethod extends Page implements ActionListener{
         // check and cash checkboxes
         check = new JCheckBox("                                                                                                                     Check");
         check.setFont(checkBoxFont);
+        check.setBackground(Color.decode("#cccccc"));
         cash = new JCheckBox("                                                                                                                     Cash");
+        cash.setBackground(Color.decode("#cccccc"));
         cash.setFont(checkBoxFont);
 
         // create confirm button
@@ -127,4 +130,4 @@ public class PaymentMethod extends Page implements ActionListener{
         }
      }
 
-    }
+}

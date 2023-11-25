@@ -1,9 +1,11 @@
 package swe3313;
 
 import java.awt.event.*;
+import java.io.InputStream;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.*;
+import javax.imageio.ImageIO;
 
 public class ManagerPage extends Page implements ActionListener {   
     //Make buttons
@@ -15,23 +17,23 @@ public class ManagerPage extends Page implements ActionListener {
         buttonFont = new Font("Impact", Font.PLAIN, 20);
         //Instaniate buttons
         b1 = new JButton("Go to Employee Data");
-        b1.setBounds((2*w5p),16*h5p,200,50);//x axis, y axis, width, height
+        b1.setBounds((2*w5p),16*h5p,15*w1p,7*h1p);//x axis, y axis, width, height
         b1.setBackground(Color.decode("#e06666"));
         b1.setFont(buttonFont); 
 
         b2 = new JButton("Go to Sale Data");
-        b2.setBounds((16*w5p),16*h5p,200,50);
+        b2.setBounds((16*w5p),16*h5p,15*w1p,7*h1p);
         b2.setBackground(Color.decode("#e06666"));
         b2.setFont(buttonFont);
 
         b3 = new JButton("Home");
-        b3.setBounds(w5p, h5p, 150, 50);
+        b3.setBounds(w5p, h5p, 10*w1p, 7*h1p);
         b3.setBackground(Color.decode("#e06666"));
         b3.setFont(buttonFont);
 
         //Make page title
         title = new JLabel("Welcome Manager!");
-        title.setBounds((7*w5p)-10, h5p, 700, 70);
+        title.setBounds((35*w1p), 2*h1p, 40*w1p, 10*h1p);
         title.setFont(new Font("Impact", Font.BOLD, 58));
     
         //Add actions
@@ -39,7 +41,14 @@ public class ManagerPage extends Page implements ActionListener {
         b2.addActionListener(this);
         b3.addActionListener(this);
         //Create logo using a icon
-        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
+        try {
+        InputStream stream = getClass().getResourceAsStream("/Mom & Pizza.png");
+        img = new JLabel(new ImageIcon(ImageIO.read(stream)));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         img.setBounds((7*w5p), 4*h5p, 438, 438);
         //add elements to page
         this.add(img);

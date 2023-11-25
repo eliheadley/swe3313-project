@@ -32,42 +32,42 @@ public class SignupPage extends Page implements ActionListener{
         lPayment = new JLabel("Preferred Payment Method");
         title = new JLabel("Sign Up");
         font = new Font("Impact", Font.PLAIN, 18);
-        textFont = new Font("Roboto Serif", Font.PLAIN, 18);
+        textFont = new Font("Roboto Serif", Font.PLAIN, 20);
         //Instatiate buttons
         b1 = new JButton("Sign Up");
         b2 = new JButton("Back");
         //set textField bounds        
-        tUsername.setBounds(6*w5p, 5*h5p, 250, 50);
+        tUsername.setBounds(6*w5p, 5*h5p, 17*w1p, 7*h1p);
         tUsername.setFont(textFont);
-        lUsername.setBounds(6*w5p, (5*h5p)-20, 100, 20);
+        lUsername.setBounds(6*w5p, 22*h1p, 10*w1p, 6*h1p);
         lUsername.setFont(font);
-        tFirstName.setBounds(11*w5p, 5*h5p, 250, 50);
+        tFirstName.setBounds(11*w5p, 5*h5p, 17*w1p, 7*h1p);
         tFirstName.setFont(textFont);
-        lFirstName.setBounds(11*w5p, (5*h5p)-20, 100, 20);
+        lFirstName.setBounds(11*w5p, 22*h1p, 10*w1p, 6*h1p);
         lFirstName.setFont(font);
-        tPassword.setBounds(6*w5p, 8*h5p, 250, 50);
+        tPassword.setBounds(6*w5p, 8*h5p, 17*w1p, 7*h1p);
         tPassword.setFont(textFont);
-        lPassword.setBounds(6*w5p, (8*h5p)-20, 100, 20);
+        lPassword.setBounds(6*w5p, 38*h1p, 10*w1p, 6*h1p);
         lPassword.setFont(font);
-        tLastName.setBounds(11*w5p, 8*h5p, 250, 50);
+        tLastName.setBounds(11*w5p, 8*h5p, 17*w1p, 7*h1p);
         tLastName.setFont(textFont);
-        lLastName.setBounds(11*w5p, (8*h5p)-20, 100, 20);
+        lLastName.setBounds(11*w5p, 38*h1p, 10*w1p, 6*h1p);
         lLastName.setFont(font);
-        tAddress.setBounds(6*w5p, 11*h5p, 250, 50);
+        tAddress.setBounds(6*w5p, 11*h5p, 17*w1p, 7*h1p);
         tAddress.setFont(textFont);
-        lAddress.setBounds(6*w5p, (11*h5p)-20, 100, 20);
+        lAddress.setBounds(6*w5p, 54*h1p, 10*w1p, 6*h1p);
         lAddress.setFont(font);
-        tPayment.setBounds(11*w5p, 11*h5p, 250, 50);
+        tPayment.setBounds(11*w5p, 11*h5p, 17*w1p, 7*h1p);
         tPayment.setFont(textFont);
-        lPayment.setBounds(11*w5p, (11*h5p)-20, 250, 20);
+        lPayment.setBounds(11*w5p, 54*h1p, 17*w1p, 6*h1p);
         lPayment.setFont(font);
-        title.setBounds((10*w5p)-60, h5p, 200, 50);
-        title.setFont(new Font("Impact", Font.BOLD, 48));
+        title.setBounds(45*w1p, h5p, 15*w1p, 9*h1p);
+        title.setFont(new Font("Impact", Font.BOLD, 58));
         //set button sizes
-        b1.setBounds((9*w5p)+10,14*h5p ,150,50);//x axis, y axis, width, height 
+        b1.setBounds(45*w1p,14*h5p ,10*w1p,7*h1p);//x axis, y axis, width, height 
         b1.setBackground(Color.decode("#e06666"));
         b1.setFont(new Font("Impact", Font.PLAIN, 20));       
-        b2.setBounds(w5p, h5p, 150,50);
+        b2.setBounds(w5p, h5p, 10*w1p,7*h1p);
         b2.setBackground(Color.decode("#e06666"));
         b2.setFont(new Font("Impact", Font.PLAIN, 20));  
         //Add actions to buttons

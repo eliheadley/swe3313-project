@@ -45,6 +45,7 @@ public class DeliveryMethod extends Page implements ActionListener{
         //credit/debit checkbox
         carryOut = new JCheckBox("                                                                                                                      Carry Out");
         carryOut.setFont(checkBoxFont);
+        carryOut.setBackground(Color.decode("#cccccc"));
         
         // make pay in person label
         label2 = new JLabel("Pick Up");
@@ -60,6 +61,7 @@ public class DeliveryMethod extends Page implements ActionListener{
         // check and cash checkboxes
         pickup = new JCheckBox("                                                                                                                     Pickup");
         pickup.setFont(checkBoxFont);
+        pickup.setBackground(Color.decode("#cccccc"));
 
         // create confirm button
         confirm = new JButton("Confirm");
@@ -121,4 +123,4 @@ public class DeliveryMethod extends Page implements ActionListener{
         }
      }
 
-    }
+}

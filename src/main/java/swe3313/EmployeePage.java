@@ -68,6 +68,7 @@ public class EmployeePage extends Page implements ActionListener {
      public void actionPerformed(ActionEvent e){
         //Current Orders button
         if(e.getActionCommand().equals("Go to Current Orders")){
+            new CurrentOrders().showCurrentOrders(true);
             this.dispose();
          //Home button
         }else if(e.getActionCommand().equals("Home")){

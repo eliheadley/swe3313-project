@@ -20,7 +20,7 @@ public class Database{
             pstmt.setString(1, userName);
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
-            querry = new String[6];
+            querry = new String[7];
             while(rs.next()){
                 for(int i=0; i<querry.length; i++){
                     querry[i] = rs.getString(i+1);

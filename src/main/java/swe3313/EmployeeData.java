@@ -11,8 +11,16 @@ public class EmployeeData extends Page implements ActionListener {
     JLabel title;
     JButton back, veiwEmployeeData, editEmployeeData, save;
     Font buttonFont, textFont, titleFont;
+    int numEmployes;
+    
 
     public EmployeeData(){
+        numEmployes = 3;
+        String[][] currentEmployees = {
+            {"1000345698", "Eli", "Headley", "Chef", "$15.00 hourly"},
+            {"1000345789", "Max", "Wender", "Manager", "$25.00 hourly"},
+            {"1000346123", "Aman", "Bhayani", "Delivery Driver", "$12.00 hourly"}
+        };
         buttonFont = new Font("Impact", Font.PLAIN, 20);
         textFont = new Font("Impact", Font.PLAIN, 20);
         titleFont = new Font("Impact", Font.BOLD, 64);
@@ -100,7 +108,10 @@ public class EmployeeData extends Page implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-
+    if(e.getActionCommand().equals("Back")){
+        new ManagerPage().showManager(true);
+        this.dispose();
+    }
     }
     
 }

@@ -82,7 +82,13 @@ public class LoginPage extends Page implements ActionListener {
             password = txtIn2.getText();
             user = db.getUser(phoneNumber, password);
             if(user[0] != null){
-                txtIn1.setText("Correct!");
+                if(user[6].toLowerCase().equals("customer")){
+                    new PizzaMenu().showPizzaMenu(true);
+                }else if(user[6].toLowerCase().equals("employee")){
+                    new EmployeePage().showEmployee(true);
+                }else if(user[6].toLowerCase().equals("manager")){
+                    new ManagerPage().showManager(true);
+                }
             }else{
                 txtIn1.setText("Invalid Username or Password");
                 txtIn2.setText("Invalid Username or Password");

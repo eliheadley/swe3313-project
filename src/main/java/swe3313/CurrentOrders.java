@@ -93,7 +93,10 @@ public class CurrentOrders extends Page implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-
+        if(e.getActionCommand().equals("Back")){
+            new EmployeePage().showEmployee(true);
+            this.dispose();
+        }
     }
     
 }

@@ -21,7 +21,7 @@ public class ManagerPage extends Page implements ActionListener {
         b1.setBackground(Color.decode("#e06666"));
         b1.setFont(buttonFont); 
 
-        b2 = new JButton("Go to Sale Data");
+        b2 = new JButton("Go to Sales Data");
         b2.setBounds((16*w5p),16*h5p,15*w1p,7*h1p);
         b2.setBackground(Color.decode("#e06666"));
         b2.setFont(buttonFont);
@@ -74,10 +74,13 @@ public class ManagerPage extends Page implements ActionListener {
      public void actionPerformed(ActionEvent e){
         //Employee data button
         if(e.getActionCommand().equals("Go to Employee Data")){
+            new EmployeeData().showEmployeeData(true);
             this.dispose();
          //Sales data button
         }else if(e.getActionCommand().equals("Go to Sales Data")){
+            new SalesData().showSalesData(true);
             this.dispose();
+        //Home button
         }else if(e.getActionCommand().equals("Home")){
             new MainPage().showMain(true);
             this.dispose();

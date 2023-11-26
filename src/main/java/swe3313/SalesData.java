@@ -86,7 +86,10 @@ public class SalesData extends Page implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
-
+        if(e.getActionCommand().equals("Back")){
+            new ManagerPage().showManager(true);
+            this.dispose();
+        }
     }
     
 }

@@ -27,7 +27,13 @@ public class Pizza {
         for(int i = 0; i < toppingsMeat.size(); i++){
             s += toppingsMeat.get(i) + ", ";
         }
-        s += "and " + other.get(toppingsMeat.size()-1);
+        if(other.size() > 1){
+            s += other.get(0) + ", ";
+            s += "and " + other.get(1);
+
+        }else{
+            s += "and " + other.get(0);
+        }
 
         return s;
     }

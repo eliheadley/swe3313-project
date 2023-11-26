@@ -10,15 +10,14 @@ public class Database{
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
-    public String[] getUser(String phoneNumber, String password){
-        sql = "SELECT * FROM users WHERE phone_number = ? AND password = ?";
+    public String[] getUser(String phoneNumber){
+        sql = "SELECT * FROM users WHERE phone_number = ?";
         String[] querry = null;
         try{
             Class.forName("org.hsqldb.jdbc.JDBCDriver");
             conn = DriverManager.getConnection(URL, "SA", "");            
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, phoneNumber);
-            pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             querry = new String[7];
             while(rs.next()){

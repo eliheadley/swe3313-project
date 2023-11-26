@@ -291,57 +291,58 @@ public class PizzaMenu extends Page implements ActionListener {
        }else if(e.getActionCommand().equals("Add to Order")){
             ArrayList<String> vegToppings = new ArrayList<>();
             if (onionCheckbox.isSelected()) {
-                vegToppings.add(String.valueOf(onionCheckbox));
-            } else if (tomatoesCheckbox.isSelected()) {
-                vegToppings.add(String.valueOf(tomatoesCheckbox));
-            } else if (mushroomCheckbox.isSelected()) {
-                vegToppings.add(String.valueOf(mushroomCheckbox));
-            } else if (pineapplesCheckbox.isSelected()) {
-                vegToppings.add(String.valueOf(pineapplesCheckbox));
+                vegToppings.add("onions");
+            } if (tomatoesCheckbox.isSelected()) {
+                vegToppings.add("tomatoes");
+            } if (mushroomCheckbox.isSelected()) {
+                vegToppings.add("mushrooms");
+            } if (pineapplesCheckbox.isSelected()) {
+                vegToppings.add("pineapple");
             }
 
             ArrayList<String> meatToppings = new ArrayList<>();
             if (pepperoniCheckbox.isSelected()) {
-                meatToppings.add(String.valueOf(pepperoniCheckbox));
+                meatToppings.add("pepperoni");
             } else if (sausageCheckbox.isSelected()) {
-                meatToppings.add(String.valueOf(sausageCheckbox));
+                meatToppings.add("sausage");
             } else if (hamCheckbox.isSelected()) {
-                meatToppings.add(String.valueOf(hamCheckbox));
+                meatToppings.add("ham");
             }
 
             ArrayList<String> otherOption = new ArrayList<>();
 
             if (extraCheeseCheckbox.isSelected()) {
-                otherOption.add(String.valueOf(extraCheeseCheckbox));
-            } else if (extraSauceCheckbox.isSelected()) {
-                otherOption.add(String.valueOf(extraSauceCheckbox));
+                otherOption.add("extra cheese");
+            }if (extraSauceCheckbox.isSelected()) {
+                otherOption.add("extra sauce");
             }
 
             String size = "";
             if (smallCheckbox.isSelected()) {
-                size = String.valueOf(smallCheckbox);
+                size = "Small";
             } else if (mediumCheckbox.isSelected()) {
-                size = String.valueOf(mediumCheckbox);
+                size = "Medium";
             } else if (largeCheckbox.isSelected()) {
-                size = String.valueOf(largeCheckbox);
+                size = "Large";
             } else if (exLargeCheckbox.isSelected()) {
-                size = String.valueOf(exLargeCheckbox);
+                size = "XL";
             }
 
 
             String crust = "";
             if (thinCheckbox.isSelected()) {
-                crust = String.valueOf(thinCheckbox);
+                crust = "thin";
             } else if (regularCheckbox.isSelected()) {
-                crust = String.valueOf(regularCheckbox);
+                crust = "regular";
             } else if (panCheckbox.isSelected()) {
-                crust = String.valueOf(panCheckbox);
+                crust = "pan";
             }
 
             //making the pizza object here
             pizza = new Pizza(size, crust, vegToppings, meatToppings, otherOption);
+            System.out.println(pizza);
 
-            pizzaCount++;        
+            pizzaCount++;      
        }
     }
 

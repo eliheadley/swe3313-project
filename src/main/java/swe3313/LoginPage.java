@@ -1,6 +1,8 @@
 package swe3313;
 
 import java.awt.event.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -80,7 +82,17 @@ public class LoginPage extends Page implements ActionListener {
         if(e.getActionCommand().equals("Login")){
             phoneNumber = txtIn1.getText();
             password = txtIn2.getText();
-            user = db.getUser(phoneNumber, password);
+            // throw exception if user does not exist
+            try{
+                user = db.getUser(phoneNumber);
+                boolean matched = Password.validatePassword(password, user[1]);
+            }catch(NullPointerException npe){
+                JOptionPane.showMessageDialog(null, "Invalid Login Information","Invalid Login", JOptionPane.ERROR_MESSAGE);
+            }catch(NoSuchAlgorithmException nae){
+                nae.printStackTrace();
+            }catch(InvalidKeySpecException ikse) {
+                ikse.printStackTrace();
+            }
             if(user[0] != null){
                 if(user[6].toLowerCase().equals("customer")){
                     new PizzaMenu().showPizzaMenu(true);

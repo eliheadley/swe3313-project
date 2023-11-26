@@ -109,9 +109,13 @@ public class SignupPage extends Page implements ActionListener{
     public void actionPerformed(ActionEvent e){
         //Continue button action
         if(e.getActionCommand().equals("Sign Up")){
-            new Database().insertUser(tPhoneNumber.getText(), tPassword.getText(), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
-            new PizzaMenu().showPizzaMenu(true);
-            this.dispose();
+            try{
+                new Database().insertUser(tPhoneNumber.getText(), tPassword.getText(), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
+                new PizzaMenu().showPizzaMenu(true);
+                this.dispose();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
         //Back button action
         }else if(e.getActionCommand().equals("Back")){
             new MainPage().showMain(true);

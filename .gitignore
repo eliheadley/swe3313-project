@@ -1,0 +1,4 @@
+# Maven built artifacts
+target/
+# Compiled class file
+*.class

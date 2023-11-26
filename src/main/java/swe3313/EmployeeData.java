@@ -57,7 +57,7 @@ public class EmployeeData extends Page implements ActionListener {
         back.setFont(buttonFont);
         back.addActionListener(this);
 
-        veiwEmployeeData = new JButton("Veiw Employee Data");
+        veiwEmployeeData = new JButton("View Employee Data");
         veiwEmployeeData.setBounds((20*w1p),(95*h1p),15*w1p,7*h1p);//x axis, y axis, width, height
         veiwEmployeeData.setBackground(Color.decode("#e06666"));
         veiwEmployeeData.setFont(buttonFont);

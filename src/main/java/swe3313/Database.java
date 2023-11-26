@@ -4,20 +4,20 @@ import java.sql.*;
 
 public class Database{
     // Old URL: "jdbc:hsqldb:hsql://localhost/"
-    private static final String URL = "jdbc:hsqldb:file:c:/Users/elihe/OneDrive/projects/swe3313-project/database/PizzaShop";
+    private static final String URL = "jdbc:hsqldb:file:database/PizzaShop";
     private Connection conn = null;
     private String sql = "";
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
-    public String[] getUser(String userName, String password){
+    public String[] getUser(String phoneNumber, String password){
         sql = "SELECT * FROM users WHERE phone_number = ? AND password = ?";
         String[] querry = null;
         try{
             Class.forName("org.hsqldb.jdbc.JDBCDriver");
             conn = DriverManager.getConnection(URL, "SA", "");            
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, userName);
+            pstmt.setString(1, phoneNumber);
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             querry = new String[7];
@@ -35,19 +35,20 @@ public class Database{
         return querry;
     }
 
-    public void insertUser(String userName, String password, String firstName, String lastName, String payment, String deliveryAddress){
+    public void insertUser(String phoneNumber, String password, String firstName, String lastName, String payment, String deliveryAddress){
         sql = "INSERT INTO users (phone_number,password, first_name, last_name, payment_method, delivery_address, user_type ) VALUES(?,?,?,?,?,?,'Customer') ";
         try{
             Class.forName("org.hsqldb.jdbc.JDBCDriver");
             conn = DriverManager.getConnection(URL, "SA", "");            
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, userName);
+            pstmt.setString(1, phoneNumber);
             pstmt.setString(2, password);
             pstmt.setString(3, firstName);
             pstmt.setString(4, lastName);
             pstmt.setString(5, payment);
             pstmt.setString(6, deliveryAddress);
             int row = pstmt.executeUpdate();
+            // TODO: Need to check for Unique Key exception - when a duplicate phone number is used
             if (row != 1)
                 {
                 throw new SQLException("Row not inserted");

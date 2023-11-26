@@ -42,7 +42,7 @@ public class ManagerPage extends Page implements ActionListener {
         b3.addActionListener(this);
         //Create logo using a icon
         try {
-        InputStream stream = getClass().getResourceAsStream("/Mom & Pizza.png");
+        InputStream stream = getClass().getResourceAsStream("/MomAndPizza.png");
         img = new JLabel(new ImageIcon(ImageIO.read(stream)));
         }
         catch (Exception e)

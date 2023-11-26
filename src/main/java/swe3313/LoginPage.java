@@ -32,7 +32,7 @@ public class LoginPage extends Page implements ActionListener {
         title.setBounds(46*w1p, h5p, 15*w1p, 9*h1p);
         title.setFont(new Font("Impact", Font.BOLD, 58));
 
-        l1 = new JLabel("Username");
+        l1 = new JLabel("Phone Number");
         l1.setBounds(38*w1p, 33*h1p,17*w1p,6*h1p);
         l1.setFont(font);
 
@@ -90,8 +90,8 @@ public class LoginPage extends Page implements ActionListener {
                     new ManagerPage().showManager(true);
                 }
             }else{
-                txtIn1.setText("Invalid Username or Password");
-                txtIn2.setText("Invalid Username or Password");
+                txtIn1.setText("Invalid PhoneNumber or Password");
+                txtIn2.setText("Invalid PhoneNumber or Password");
             } 
         //Back button action
         }else if(e.getActionCommand().equals("Back")){

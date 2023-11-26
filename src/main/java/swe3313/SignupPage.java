@@ -10,16 +10,16 @@ public class SignupPage extends Page implements ActionListener{
     String phoneNumber, password;
     String[] user;
     //creat textfields
-    JTextField tUsername, tFirstName, tPassword, tLastName, tAddress, tPayment;
-    JLabel lUsername, lFirstName, lPassword, lLastName, lAddress, lPayment, title;
+    JTextField tPhoneNumber, tFirstName, tPassword, tLastName, tAddress, tPayment;
+    JLabel lPhoneNumber, lFirstName, lPassword, lLastName, lAddress, lPayment, title;
     //buttons
     JButton b1, b2;
     Font font, textFont;
     //constructor
     public SignupPage(){
         //Instaniate textfields
-        tUsername = new JTextField();
-        lUsername = new JLabel("Username");
+        tPhoneNumber = new JTextField();
+        lPhoneNumber = new JLabel("Phone Number");
         tFirstName = new JTextField();
         lFirstName = new JLabel("First Name");
         tPassword = new JTextField();
@@ -37,10 +37,10 @@ public class SignupPage extends Page implements ActionListener{
         b1 = new JButton("Sign Up");
         b2 = new JButton("Back");
         //set textField bounds        
-        tUsername.setBounds(6*w5p, 5*h5p, 17*w1p, 7*h1p);
-        tUsername.setFont(textFont);
-        lUsername.setBounds(6*w5p, 22*h1p, 10*w1p, 6*h1p);
-        lUsername.setFont(font);
+        tPhoneNumber.setBounds(6*w5p, 5*h5p, 17*w1p, 7*h1p);
+        tPhoneNumber.setFont(textFont);
+        lPhoneNumber.setBounds(6*w5p, 22*h1p, 10*w1p, 6*h1p);
+        lPhoneNumber.setFont(font);
         tFirstName.setBounds(11*w5p, 5*h5p, 17*w1p, 7*h1p);
         tFirstName.setFont(textFont);
         lFirstName.setBounds(11*w5p, 22*h1p, 10*w1p, 6*h1p);
@@ -74,7 +74,7 @@ public class SignupPage extends Page implements ActionListener{
         b1.addActionListener(this);
         b2.addActionListener(this);
         //Add all elements
-        this.add(tUsername);
+        this.add(tPhoneNumber);
         this.add(tFirstName);
         this.add(tPassword);
         this.add(tLastName);
@@ -83,7 +83,7 @@ public class SignupPage extends Page implements ActionListener{
         this.add(b1);
         this.add(b2);
 
-        this.add(lUsername);
+        this.add(lPhoneNumber);
         this.add(lFirstName);
         this.add(lPassword);
         this.add(lLastName);
@@ -109,7 +109,7 @@ public class SignupPage extends Page implements ActionListener{
     public void actionPerformed(ActionEvent e){
         //Continue button action
         if(e.getActionCommand().equals("Sign Up")){
-            new Database().insertUser(tUsername.getText(), tPassword.getText(), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
+            new Database().insertUser(tPhoneNumber.getText(), tPassword.getText(), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
             new PizzaMenu().showPizzaMenu(true);
             this.dispose();
         //Back button action

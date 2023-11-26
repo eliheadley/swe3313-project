@@ -37,7 +37,7 @@ public class EmployeePage extends Page implements ActionListener {
         b2.addActionListener(this);
         //Create logo using a icon
         try {
-        InputStream stream = getClass().getResourceAsStream("/Mom & Pizza.png");
+        InputStream stream = getClass().getResourceAsStream("/MomAndPizza.png");
         img = new JLabel(new ImageIcon(ImageIO.read(stream)));
         }
         catch (Exception e)

@@ -3,37 +3,65 @@ package swe3313;
 import java.util.ArrayList;
 
 public class Order {
-    ArrayList<Pizza> pizzas;
-    ArrayList<Extras> extras;
+    Pizza pizzas;
+    Extras extras;
+    double orderCost = 0f;
+    String paymentMethod;
+    boolean isDelivery;
+    int pizzaCount = 0;
 
     public Order(){
-        pizzas = new ArrayList<Pizza>();
-        extras = new ArrayList<Extras>();
+        pizzas = null;
+        extras = null;
     }
 
+
     public Order (Pizza p, Extras e){
-        pizzas = new ArrayList<Pizza>();
-        extras = new ArrayList<Extras>();
-        pizzas.add(p);
-        extras.add(e);
+        pizzas = p;
+        extras = e;
     }
 
     public void addToOrder(Pizza p){
-        pizzas.add(p);
+        pizzas = p;
     }
 
-    public static void printOrder(Pizza p, Extras e){
-        System.out.println(p.size);
-        System.out.println(p.crust);
-
-        for (String t : p.toppingsVeg){
-            System.out.println(t);
-        }
-
-        for (String t : p.toppingsMeat){
-            System.out.println(t);
-        }
-
-
+    public void addToOrder(Extras e){
+        extras = e;
     }
+
+    // getter and setter for pizza count
+    public int getPizzaCount(){
+        return pizzaCount;
+    }
+    public  void incrementPizzaCount(){
+        pizzaCount++;
+    }
+    
+    //getters for pizzas and extras
+    public Pizza getPizzas(){
+        return pizzas;
+    }
+
+    public Extras getExtras(){
+        return extras;
+    }
+
+    // setters for isDelivery and payment method
+    public void setDeliveryMethod(boolean isDelivery){
+        this.isDelivery = isDelivery;
+    }
+
+    public void setPaymentMethod(String s){
+        paymentMethod = s;
+    }
+
+    // calculate order cost
+    public double calcCost(){
+        orderCost += pizzas.calcCost();
+        orderCost += extras.calcCost();
+        orderCost += (orderCost/10); 
+        return Math.round(orderCost * 100.0) / 100.0;
+    }
+
+
 }

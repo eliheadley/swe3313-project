@@ -82,18 +82,19 @@ public class LoginPage extends Page implements ActionListener {
         if(e.getActionCommand().equals("Login")){
             phoneNumber = txtIn1.getText();
             password = txtIn2.getText();
+            boolean matched = false;
             // throw exception if user does not exist
             try{
                 user = db.getUser(phoneNumber);
-                boolean matched = Password.validatePassword(password, user[1]);
+                matched = Password.validatePassword(password, user[1]);
             }catch(NullPointerException npe){
-                JOptionPane.showMessageDialog(null, "Invalid Login Information","Invalid Login", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Invalid Phone Number","Invalid Login", JOptionPane.ERROR_MESSAGE);
             }catch(NoSuchAlgorithmException nae){
                 nae.printStackTrace();
             }catch(InvalidKeySpecException ikse) {
                 ikse.printStackTrace();
             }
-            if(user[0] != null){
+            if(matched){
                 if(user[6].toLowerCase().equals("customer")){
                     new PizzaMenu().showPizzaMenu(true);
                 }else if(user[6].toLowerCase().equals("employee")){
@@ -101,9 +102,13 @@ public class LoginPage extends Page implements ActionListener {
                 }else if(user[6].toLowerCase().equals("manager")){
                     new ManagerPage().showManager(true);
                 }
+            }else if(user != null && matched == false){
+                JOptionPane.showMessageDialog(null, "Invalid Password","Invalid Login", JOptionPane.ERROR_MESSAGE);
+                txtIn1.setText("");
+                txtIn2.setText("");
             }else{
-                txtIn1.setText("Invalid PhoneNumber or Password");
-                txtIn2.setText("Invalid PhoneNumber or Password");
+                txtIn1.setText("");
+                txtIn2.setText("");
             } 
         //Back button action
         }else if(e.getActionCommand().equals("Back")){

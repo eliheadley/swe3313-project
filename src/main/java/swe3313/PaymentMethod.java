@@ -45,6 +45,7 @@ public class PaymentMethod extends Page implements ActionListener{
         //credit/debit checkbox
         credit = new JCheckBox("                                                                                                                      Credit/Debit");
         credit.setFont(checkBoxFont);
+        credit.addActionListener(this);
         credit.setBackground(Color.decode("#cccccc"));
         
         // make pay in person label
@@ -61,10 +62,12 @@ public class PaymentMethod extends Page implements ActionListener{
         // check and cash checkboxes
         check = new JCheckBox("                                                                                                                     Check");
         check.setFont(checkBoxFont);
+        check.addActionListener(this);
         check.setBackground(Color.decode("#cccccc"));
         cash = new JCheckBox("                                                                                                                     Cash");
         cash.setBackground(Color.decode("#cccccc"));
         cash.setFont(checkBoxFont);
+        cash.addActionListener(this);
 
         // create confirm button
         confirm = new JButton("Confirm");
@@ -124,9 +127,31 @@ public class PaymentMethod extends Page implements ActionListener{
     @Override
      public void actionPerformed(ActionEvent e){
          // continue button
-            if(e.getActionCommand().equals("Confirm")){
+         if(e.getActionCommand().equals("Back")){
+            new OrderSummary().showOrderSummary(true);
+            this.dispose();
+        }else if(e.getActionCommand().equals("                                                                                                                      Credit/Debit")){
+            if(credit.isSelected()){
+                check.setSelected(false);
+                cash.setSelected(false);
+            }
+        }else if(e.getActionCommand().equals("                                                                                                                     Check")){
+            if(check.isSelected()){
+                credit.setSelected(false);
+                cash.setSelected(false);
+            }
+        }else if(e.getActionCommand().equals("                                                                                                                     Cash")){
+            if(cash.isSelected()){
+                credit.setSelected(false);
+                check.setSelected(false);
+            }
+        }else if(e.getActionCommand().equals("Confirm")){
+            if(credit.isSelected() == false && check.isSelected() == false && cash.isSelected() == false){
+                JOptionPane.showMessageDialog(this, "Please Select a Payment Method", "Oops!", JOptionPane.ERROR_MESSAGE);
+            }else{
                 new DeliveryMethod().showDeliveryMethod(true);
                 this.dispose();
+            }
         }
      }
 

@@ -164,7 +164,7 @@ public class CreditInfo extends Page implements ActionListener {
         } 
     }
 
-    public static boolean isNumeric(String strNum) {
+    public boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }

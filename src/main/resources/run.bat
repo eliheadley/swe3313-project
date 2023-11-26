@@ -1,4 +1,5 @@
 java -cp ".;.\hsqldb-2.7.2.jar;.\swe3313-1.0.jar" swe3313.Main
+REM TODO put the following in README.md
 REM the following to run code after compile and package.  Run from main project folder, uses
 REM   database in the database folder
 rem java -cp ".;.\database\hsqldb-2.7.2.jar;.\target\swe3313-1.0.jar" swe3313.Main

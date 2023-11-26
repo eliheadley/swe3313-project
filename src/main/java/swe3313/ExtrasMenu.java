@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ExtrasMenu extends Page implements ActionListener {
     JPanel rightPanel, drinkChoices, drinkSizes, leftPanel, pepsi_oragange, rtBeer_lemonade;
@@ -48,20 +49,28 @@ public class ExtrasMenu extends Page implements ActionListener {
         // create check boxes for drink menu
         pepsi = new JCheckBox("Pepsi");
         pepsi.setFont(checkBoxFont);
+        pepsi.addActionListener(this);
         dietPepsi = new JCheckBox("Diet Pepsi");
         dietPepsi.setFont(checkBoxFont);
+        dietPepsi.addActionListener(this);
         orange = new JCheckBox("Orange");
         orange.setFont(checkBoxFont);
+        orange.addActionListener(this);
         dietOrange = new JCheckBox("Diet Orange");
         dietOrange.setFont(checkBoxFont);
+        dietOrange.addActionListener(this);
         rootBeer = new JCheckBox("Root Beer");
         rootBeer.setFont(checkBoxFont);
+        rootBeer.addActionListener(this);
         dietRB = new JCheckBox("Diet Root Beer");
         dietRB.setFont(checkBoxFont);
+        dietRB.addActionListener(this);
         sierraMist = new JCheckBox("Sierra Mist");
         sierraMist.setFont(checkBoxFont);
+        sierraMist.addActionListener(this);
         lemonade = new JCheckBox("Lemonade");
         lemonade.setFont(checkBoxFont);
+        lemonade.addActionListener(this);
 
         drinkSizeLabel = new JLabel("Size:  ");
         drinkSizeLabel.setFont(font1);
@@ -138,6 +147,7 @@ public class ExtrasMenu extends Page implements ActionListener {
         addToOrderButton.setBounds(87*w1p,17*h5p,10*w1p, 7*h1p);
         addToOrderButton.setBackground(Color.decode("#e06666"));
         addToOrderButton.setFont(buttonFont);
+        addToOrderButton.addActionListener(this);
 
         // create title
         title = new JLabel("Extras");
@@ -194,7 +204,6 @@ public class ExtrasMenu extends Page implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         //back button
-
         if(e.getActionCommand().equals("Back")){
             new PizzaMenu().showPizzaMenu(true);
             this.dispose();        
@@ -202,22 +211,140 @@ public class ExtrasMenu extends Page implements ActionListener {
             new OrderSummary().showOrderSummary(true);
             this.dispose();
         //Checkboxes
-        }else if(e.getActionCommand().equals("Small")){
+        }else if(e.getActionCommand().equals("Small  ")){
             if (small.isSelected()) {
                       medium.setSelected(false);
                       large.setSelected(false);
               }
-        }else if(e.getActionCommand().equals("Medium")){
+        }else if(e.getActionCommand().equals("Medium  ")){
               if (medium.isSelected()) {
                   small.setSelected(false);
                   large.setSelected(false);
               }
-        }else if(e.getActionCommand().equals("Large")){
+        }else if(e.getActionCommand().equals("Large  ")){
               if (large.isSelected()) {
                   small.setSelected(false);
                   medium.setSelected(false);
                }
     
+        }else if(e.getActionCommand().equals("Pepsi")){
+            selectDrink("Pepsi");
+        }else if(e.getActionCommand().equals("Diet Pepsi")){
+            selectDrink("Diet Pepsi");
+        }else if(e.getActionCommand().equals("Orange")){
+            selectDrink("Orange");
+        }else if(e.getActionCommand().equals("Diet Orange")){
+            selectDrink("Diet Orange");
+        }else if(e.getActionCommand().equals("Root Beer")){
+            selectDrink("Root Beer");
+        }else if(e.getActionCommand().equals("Diet Root Beer")){
+            selectDrink("Diet Root Beer");
+        }else if(e.getActionCommand().equals("Sierra Mist")){
+            selectDrink("Sierra Mist");
+        }else if(e.getActionCommand().equals("Lemonade")){
+            selectDrink("Lemonade");
+        }else if(e.getActionCommand().equals("Add to Order")){
+           
+            // set the drink size
+            String size = "";
+            if (small.isSelected()) {
+                size = "Small";
+            } else if (medium.isSelected()) {
+                size = "Medium";
+            } else if (large.isSelected()) {
+                size = "Large";
+            }
+
+            // get the sides
+            ArrayList<String> sides = new ArrayList<String>();
+            if(breadSticks.isSelected()){
+                sides.add("Breadsticks");
+            } if(breadSticksBites.isSelected()){
+                sides.add("Breadsticks Bites");
+            } if(cookie.isSelected()){
+                sides.add("Big Chocolate Chip Cookie");
+            }
+
+            //get the sides
+            String drinkChoice = "";
+            if(pepsi.isSelected()){
+                drinkChoice  = "Pepsi";
+            }else if(dietPepsi.isSelected()){
+                drinkChoice  = "Diet Pepsi";
+            }else if(orange.isSelected()){
+                drinkChoice  = "Orange";
+            }else if(dietOrange.isSelected()){
+                drinkChoice  = "Diet Orange";
+            }else if(rootBeer.isSelected()){
+                drinkChoice  = "Root Beer";
+            }else if(dietRB.isSelected()){
+                drinkChoice  = "Diet Root Beer";
+            }else if(sierraMist.isSelected()){
+                drinkChoice  = "Sierra Mist";
+            }else if(lemonade.isSelected()){
+                drinkChoice  = "Lemonade";
+            }
+
+            if(validateSelection()){
+                JOptionPane.showMessageDialog(null, "Must select both drink and size","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
+            }else{
+                Extras extras = new Extras(size, drinkChoice, sides);
+                currentOrder.addToOrder(extras);
+            }
+            
         }
+    }
+
+    public void selectDrink(String s){
+        // p, dp, o, do, rb, drb, sm, l
+        boolean[] selected = {false, false, false, false, false, false, false, false};
+        switch (s.toLowerCase()){
+            case "pepsi":
+                selected[0] = true;
+                break;
+            case "diet pepsi":
+                selected[1] = true;
+                break;
+            case "orange":
+                selected[2] = true;
+                break;
+            case "diet orange":
+                selected[3] = true;
+                break;
+            case "root beer":
+                selected[4] = true;
+                break;
+            case "diet root beer":
+                selected[5] = true;
+                break;
+            case "sierra mist":
+                selected[6] = true;
+                break;
+            case "lemonade":
+                selected[7] = true;
+                break;
+        }
+        pepsi.setSelected(selected[0]);
+        dietPepsi.setSelected(selected[1]);
+        orange.setSelected(selected[2]);
+        dietOrange.setSelected(selected[3]);
+        rootBeer.setSelected(selected[4]);
+        dietRB.setSelected(selected[5]);
+        sierraMist.setSelected(selected[6]);
+        lemonade.setSelected(selected[7]);
+
+    }
+
+    public boolean validateSelection(){
+         if(!(small.isSelected()) && !(medium.isSelected()) && !(large.isSelected())){
+            if(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected()){
+                return true;
+            }
+         }else if(!(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected())){
+            if(small.isSelected() || medium.isSelected() || large.isSelected()){
+                return true;
+            }
+         }
+         return false;
     }
 }

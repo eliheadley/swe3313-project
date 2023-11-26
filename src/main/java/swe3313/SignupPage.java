@@ -109,10 +109,14 @@ public class SignupPage extends Page implements ActionListener{
     public void actionPerformed(ActionEvent e){
         //Continue button action
         if(e.getActionCommand().equals("Sign Up")){
+            //check valid inputs
             try{
-                new Database().insertUser(tPhoneNumber.getText(), tPassword.getText(), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
+                validateInputs();
+                new Database().insertUser(tPhoneNumber.getText(), Password.generateStorngPasswordHash(tPassword.getText()), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
                 new PizzaMenu().showPizzaMenu(true);
                 this.dispose();
+            }catch(InvalidInputException iie){
+                JOptionPane.showMessageDialog(null, iie.getMessage(),"Invalid Signup", JOptionPane.ERROR_MESSAGE);
             }catch(Exception ex){
                 ex.printStackTrace();
             }
@@ -120,6 +124,67 @@ public class SignupPage extends Page implements ActionListener{
         }else if(e.getActionCommand().equals("Back")){
             new MainPage().showMain(true);
             this.dispose();
+        }
+    }
+
+    private void validateInputs() throws InvalidInputException{
+        //iterate through all 6 text fields
+        for(int i = 0; i < 6; i++){
+            // check phone number field
+            String phone = tPhoneNumber.getText();
+            if(phone.length() != 10){
+                throw new InvalidInputException("Phone number must be exactly 10 characters long");
+            }else if(phone.length() == 10){
+                for(int j = 0; j < phone.length(); j++){
+                    if(phone.charAt(j) < 48 || phone.charAt(j) > 57){
+                        throw new InvalidInputException("Phone Number should only have digits 0-9");
+                    }
+                }
+            }
+
+            // check password field
+            String password = tPassword.getText();
+            if(password.length() < 8 || password.length() > 25){
+                throw new InvalidInputException("Password must be 8-25 characters");
+            }
+
+            // check delviery address field
+            String address = tAddress.getText();
+            if(address.length() == 0){
+                throw new InvalidInputException("Delivery Address is required");
+            }
+
+            // check first name field
+            String firtName = tFirstName.getText();
+            if(firtName.length() == 0){
+                throw new InvalidInputException("Firt Name is required");
+            }else{
+                for(int j = 0; j < firtName.length(); j++){
+                    if(firtName.charAt(j) < 65 || (firtName.charAt(j) > 90 && firtName.charAt(j) < 97) || firtName.charAt(j) > 122){
+                        throw new InvalidInputException("Special characters not allowed only A-z in First Name");
+                    }
+                }
+            } 
+            
+            // check first last name field
+            String lastName = tLastName.getText();
+            if(lastName.length() == 0){
+                throw new InvalidInputException("Last Name is required");
+            }else{
+                for(int j = 0; j < lastName.length(); j++){
+                    if(lastName.charAt(j) < 65 || (lastName.charAt(j) > 90 && lastName.charAt(j) < 97) || lastName.charAt(j) > 122){
+                        throw new InvalidInputException("Special characters not allowed only A-z in Last Name");
+                    }
+                }
+            }
+            
+            // check payment type field
+            String payment = tPayment.getText();
+            if(payment.length() == 0){
+                throw new InvalidInputException("Prefered Payment Method is required");
+            }else if(!(payment.toLowerCase().equals("credit")) && !(payment.toLowerCase().equals("check")) && !(payment.toLowerCase().equals("cash"))){
+                throw new InvalidInputException("Payment method must be Credit/Check/Cash");
+            }
         }
     }
 }

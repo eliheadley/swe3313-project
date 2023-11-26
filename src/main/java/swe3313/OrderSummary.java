@@ -8,9 +8,11 @@ import javax.swing.border.Border;
 
 public class OrderSummary extends Page implements ActionListener{
     JLabel title, pizzaLabel, extrasLabel, qty1, each1, total1, line1, line2, 
-    qty2, each2, total2;
+    qty2, each2, total2, pizzaItem1, pizzaItem2;
     JButton back, checkOut, edit1, edit2, edit3, inc1, inc2, inc3, dec1, dec2, dec3;
     Font buttonFont, textFont, titleFont;
+    Pizza pizza;
+    Extras extras;
 
     public OrderSummary(){
         buttonFont = new Font("Impact", Font.PLAIN, 20);
@@ -141,12 +143,24 @@ public class OrderSummary extends Page implements ActionListener{
         checkOut.setFont(buttonFont);
         checkOut.addActionListener(this);
 
+        // make pizza object to be displayed on the screen
+        pizza = currentOrder.getPizzas();
+
+        String pizzaDescription = "";
+        pizzaDescription += pizza;
+        pizzaItem1 = new JLabel(pizzaDescription);
+        pizzaItem1.setBounds(2*w5p, 34*h1p, 50*w1p, 6*h1p);
+        pizzaItem1.setFont(textFont);
+
+
+
         // add buttons to frame
         this.add(back);
         this.add(checkOut);
         // add labels for first summary
         this.add(title);
         this.add(line1);
+        this.add(pizzaItem1);
         this.add(pizzaLabel); this.add(qty1); this.add(each1); this.add(total1);
         this.add(edit1); this.add(inc1); this.add(dec1);
         // add labels for second summary
@@ -154,7 +168,7 @@ public class OrderSummary extends Page implements ActionListener{
         this.add(extrasLabel); this.add(qty2); this.add(each2); this.add(total2);
         this.add(edit2); this.add(inc2); this.add(dec2);
         // add buttons for thirds summary
-         this.add(edit3); this.add(inc3); this.add(dec3);
+        this.add(edit3); this.add(inc3); this.add(dec3);
 
         // set the layout for the frame
         this.getContentPane().setLayout(null);

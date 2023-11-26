@@ -12,7 +12,7 @@ public class DeliveryMethod extends Page implements ActionListener{
     JLabel title, label1, label2, line1, line2;
     JPanel carryOutPanel, pickUpPanel;
     JCheckBox carryOut, pickup;
-    JButton confirm;
+    JButton confirm, backButton;
     Font buttonFont, textFont, titleFont, checkBoxFont;
 
     public DeliveryMethod(){
@@ -31,6 +31,13 @@ public class DeliveryMethod extends Page implements ActionListener{
         img.setBounds((7*w5p), 3*h5p, 438, 438);
         this.add(img); */
 
+         //back button
+         backButton = new JButton("Back");
+         backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
+         backButton.setBackground(Color.decode("#e06666"));
+         backButton.setFont(buttonFont);
+         backButton.addActionListener(this);
+
         //Make first separator line
         line1 = new JLabel();
         line1.setBounds(2*w5p, 6*h5p, 1200, 2);
@@ -46,6 +53,7 @@ public class DeliveryMethod extends Page implements ActionListener{
         carryOut = new JCheckBox("                                                                                                                      Carry Out");
         carryOut.setFont(checkBoxFont);
         carryOut.setBackground(Color.decode("#cccccc"));
+        carryOut.addActionListener(this);
         
         // make pay in person label
         label2 = new JLabel("Pick Up");
@@ -62,6 +70,7 @@ public class DeliveryMethod extends Page implements ActionListener{
         pickup = new JCheckBox("                                                                                                                     Pickup");
         pickup.setFont(checkBoxFont);
         pickup.setBackground(Color.decode("#cccccc"));
+        pickup.addActionListener(this);
 
         // create confirm button
         confirm = new JButton("Confirm");
@@ -89,6 +98,7 @@ public class DeliveryMethod extends Page implements ActionListener{
         this.add(title);
         // add buttons to frame
         this.add(confirm);
+        this.add(backButton);
         // add alements for first option
         this.add(carryOutPanel);
         this.add(label1);
@@ -116,10 +126,27 @@ public class DeliveryMethod extends Page implements ActionListener{
 
     @Override
      public void actionPerformed(ActionEvent e){
-         // continue button
-            if(e.getActionCommand().equals("Confirm")){
+         //checkbox errors
+         if(e.getActionCommand().equals("Back")){
+            new PaymentMethod().showPaymentMethod(true);
+            this.dispose();
+        }else if(e.getActionCommand().equals("                                                                                                                      Carry Out")){
+            if(carryOut.isSelected()){
+                pickup.setSelected(false);
+            }
+        }
+        else if(e.getActionCommand().equals("                                                                                                                     Pickup")){
+            if(pickup.isSelected()){
+                carryOut.setSelected(false);
+            }
+        }
+        else if(e.getActionCommand().equals("Confirm")){
+            if (carryOut.isSelected() == false && pickup.isSelected() == false){
+                JOptionPane.showMessageDialog(this, "Please Select a Delivery Method", "Oops!", JOptionPane.ERROR_MESSAGE);
+            }else {
                 new CreditInfo().showCreditInfo(true);
                 this.dispose();
+            }
         }
      }
 

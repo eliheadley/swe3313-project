@@ -303,9 +303,9 @@ public class PizzaMenu extends Page implements ActionListener {
             ArrayList<String> meatToppings = new ArrayList<>();
             if (pepperoniCheckbox.isSelected()) {
                 meatToppings.add("pepperoni");
-            } else if (sausageCheckbox.isSelected()) {
+            }if (sausageCheckbox.isSelected()) {
                 meatToppings.add("sausage");
-            } else if (hamCheckbox.isSelected()) {
+            }if (hamCheckbox.isSelected()) {
                 meatToppings.add("ham");
             }
 
@@ -325,9 +325,8 @@ public class PizzaMenu extends Page implements ActionListener {
             } else if (largeCheckbox.isSelected()) {
                 size = "Large";
             } else if (exLargeCheckbox.isSelected()) {
-                size = "XL";
+                size = "Extra Large";
             }
-
 
             String crust = "";
             if (thinCheckbox.isSelected()) {
@@ -338,11 +337,16 @@ public class PizzaMenu extends Page implements ActionListener {
                 crust = "pan";
             }
 
-            //making the pizza object here
-            pizza = new Pizza(size, crust, vegToppings, meatToppings, otherOption);
-            System.out.println(pizza);
-
-            pizzaCount++;      
+            if(validateSelection()){
+                JOptionPane.showMessageDialog(null, "Must select both pizza size and crust style","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
+            }else if (currentOrder.getPizzaCount() > 10){
+                JOptionPane.showMessageDialog(null, "Maxium order size of 10 pizzas","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
+            }else{
+                 //making the pizza object here
+                pizza = new Pizza(size, crust, vegToppings, meatToppings, otherOption);
+                currentOrder.addToOrder(pizza);
+                currentOrder.incrementPizzaCount();     
+            }
        }
     }
 
@@ -352,17 +356,16 @@ public class PizzaMenu extends Page implements ActionListener {
         }
     }
 
-
-//    public static void printOrder(Pizza order){
-//        System.out.println(order.size);
-//        System.out.println(order.crust);
-//
-//        for (String t : order.toppingsVeg){
-//            System.out.println(t);
-//        }
-//
-//        for (String t : order.toppingsMeat){
-//            System.out.println(t);
-//        }
-//    }
+    public boolean validateSelection(){
+         if(!(smallCheckbox.isSelected()) && !(mediumCheckbox.isSelected()) && !(largeCheckbox.isSelected()) && !(exLargeCheckbox.isSelected())){
+            if(thinCheckbox.isSelected() || regularCheckbox.isSelected() || panCheckbox.isSelected()){
+                return true;
+            }
+         }else if(!(thinCheckbox.isSelected() || regularCheckbox.isSelected() || panCheckbox.isSelected())){
+            if(smallCheckbox.isSelected() || mediumCheckbox.isSelected() || largeCheckbox.isSelected() || exLargeCheckbox.isSelected()){
+                return true;
+            }
+         }
+         return false;
+    }
 }

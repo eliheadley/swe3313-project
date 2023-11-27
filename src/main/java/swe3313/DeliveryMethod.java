@@ -130,12 +130,12 @@ public class DeliveryMethod extends Page implements ActionListener{
          if(e.getActionCommand().equals("Back")){
             new PaymentMethod().showPaymentMethod(true);
             this.dispose();
-        }else if(e.getActionCommand().equals("                                                                                                                      Carry Out")){
+        }else if(e.getSource().equals(carryOut)){
             if(carryOut.isSelected()){
                 pickup.setSelected(false);
             }
         }
-        else if(e.getActionCommand().equals("                                                                                                                     Pickup")){
+        else if(e.getSource().equals(pickup)){
             if(pickup.isSelected()){
                 carryOut.setSelected(false);
             }
@@ -144,6 +144,11 @@ public class DeliveryMethod extends Page implements ActionListener{
             if (carryOut.isSelected() == false && pickup.isSelected() == false){
                 JOptionPane.showMessageDialog(this, "Please Select a Delivery Method", "Oops!", JOptionPane.ERROR_MESSAGE);
             }else {
+                if(carryOut.isSelected()){
+                    currentOrder.setDeliveryMethod(true);
+                }else{
+                    currentOrder.setDeliveryMethod(false);
+                }
                 new CreditInfo().showCreditInfo(true);
                 this.dispose();
             }

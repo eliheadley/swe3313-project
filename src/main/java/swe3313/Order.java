@@ -6,14 +6,18 @@ public class Order {
     Pizza pizzas;
     Drink drinks;
     Sides sides;
-    double orderCost = 0f;
+    double orderCost;
     String paymentMethod;
     boolean isDelivery;
+    String signature;
+    double tip;
+
 
     public Order(){
         pizzas = null;
         drinks = null;
         sides = null;
+        tip = 0;
     }
 
 
@@ -21,6 +25,7 @@ public class Order {
         pizzas = p;
         drinks = d;
         sides = s;
+        tip = 0;
     }
 
     public void addToOrder(Pizza p){
@@ -60,10 +65,12 @@ public class Order {
 
     // calculate order cost
     public double calcCost(){
+        orderCost = 0;
         orderCost += pizzas.calcCost();
         orderCost += drinks.calcDrinkCost();
         orderCost += sides.calcSideCost();
         orderCost += (orderCost/10); 
+        orderCost += tip;
         return Math.round(orderCost * 100.0) / 100.0;
     }
 
@@ -79,6 +86,22 @@ public class Order {
 
     public void deleteSides(){
         sides = null;
+    }
+
+    public void setTip(double tip){
+        this.tip = tip;
+    }
+
+    public double getTip(){
+        return tip;
+    }
+
+    public void setSignature(String s){
+        signature = s;
+    }
+
+    public String getSignature(){
+        return signature;
     }
 
 }

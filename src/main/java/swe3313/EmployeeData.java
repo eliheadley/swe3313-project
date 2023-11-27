@@ -171,7 +171,7 @@ public class EmployeeData extends Page implements ActionListener {
         if(e.getActionCommand().equals("Back")){
             new ManagerPage().showManager(true);
             this.dispose();
-        }else if(e.getActionCommand().equals("Veiw Employee Data")){
+        }else if(e.getSource().equals(veiwEmployeeData)){
             Object[][] currentEmployees = {
                 { "Employee ID", "First Name", "Last Name", "Title", "Salary"},
                 {"1000345698", "Eli", "Headley", "Chef", "$15.00 hourly"},

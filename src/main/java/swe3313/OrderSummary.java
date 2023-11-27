@@ -286,11 +286,12 @@ public class OrderSummary extends Page implements ActionListener{
     @Override
      public void actionPerformed(ActionEvent e){
         //Check out button
-        if(e.getActionCommand().equals("Check Out")){
-            new PaymentMethod().showPaymentMethod(true);
-            this.dispose();
+        if(e.getSource().equals(checkOut)){
             if(Integer.parseInt(pizza.getQty()) == 0 && Integer.parseInt(sides.getSideQty()) == 0 && Integer.parseInt(drinks.getDrinkQty()) == 0){
                 JOptionPane.showMessageDialog(null, "Must have at least one item","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
+            }else{
+                new PaymentMethod().showPaymentMethod(true);
+                this.dispose();
             }
         }else if(e.getSource().equals(inc1)){
             pizza.incQty();
@@ -365,7 +366,7 @@ public class OrderSummary extends Page implements ActionListener{
         } else if(e.getSource().equals(edit2)){
             new ExtrasMenu().showExtrasMenu(true);
             currentOrder.deleteDrinks();
-            currentOrder.deletSides();
+            currentOrder.deleteSides();
             this.dispose();
         }
 

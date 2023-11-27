@@ -149,6 +149,13 @@ public class PaymentMethod extends Page implements ActionListener{
             if(credit.isSelected() == false && check.isSelected() == false && cash.isSelected() == false){
                 JOptionPane.showMessageDialog(this, "Please Select a Payment Method", "Oops!", JOptionPane.ERROR_MESSAGE);
             }else{
+                if(credit.isSelected()){
+                    currentOrder.setPaymentMethod("Credit");
+                }else if(check.isSelected()){
+                    currentOrder.setPaymentMethod("Check");
+                }else if(cash.isSelected()){
+                    currentOrder.setPaymentMethod("Cash");
+                }
                 new DeliveryMethod().showDeliveryMethod(true);
                 this.dispose();
             }

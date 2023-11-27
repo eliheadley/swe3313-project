@@ -244,8 +244,10 @@ public class ExtrasMenu extends Page implements ActionListener {
             if(validateSelection()){
                 JOptionPane.showMessageDialog(null, "Must select both drink and size","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
             }else{
-                Extras extras = new Extras(size, drinkChoice, sides);
-                currentOrder.addToOrder(extras);
+                Drink drinks = new Drink(size, drinkChoice);
+                Sides sideObj = new Sides(sides);
+                currentOrder.addToOrder(drinks);
+                currentOrder.addToOrder(sideObj);
                 new OrderSummary().showOrderSummary(true);
                 this.dispose();
             }

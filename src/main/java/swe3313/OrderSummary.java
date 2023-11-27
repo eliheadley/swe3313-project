@@ -14,7 +14,8 @@ public class OrderSummary extends Page implements ActionListener{
     JTextArea pizzaItem, drinkItem, sidesItem, pizzaQty, pizzaPrice, pizzaTotal, sideQty, sidePrice, sideTotal,
     drinkQty, drinkPrice, drinkTotal;
     Pizza  pizza;
-    Extras extras;
+    Sides sides;
+    Drink drinks;
 
     public OrderSummary(){
         buttonFont = new Font("Impact", Font.PLAIN, 20);
@@ -51,8 +52,8 @@ public class OrderSummary extends Page implements ActionListener{
         total1.setBounds(77*w1p, 28*h1p, 5*w1p, 3*h1p);
 
         // make buttons for first summary
-        edit1 = new JButton("Edit");
-        edit1.setBounds(50*w1p, 35*h1p, 5*w1p, 4*h1p);
+        edit1 = new JButton("Edit Pizza");
+        edit1.setBounds(80*w1p, 57*h1p, 8*w1p, 6*h1p);
         edit1.setBackground(Color.decode("#e06666"));
         edit1.setFont(buttonFont);
         edit1.addActionListener(this);
@@ -94,8 +95,8 @@ public class OrderSummary extends Page implements ActionListener{
         total2.setBounds(77*w1p, 66*h1p, 5*w1p, 3*h1p);
 
         // make buttons for second summary
-        edit2 = new JButton("Edit");
-        edit2.setBounds(50*w1p, 73*h1p, 5*w1p, 4*h1p);
+        edit2 = new JButton("Edit Extras");
+        edit2.setBounds(81*w1p, 97*h1p, 8*w1p, 6*h1p);
         edit2.setBackground(Color.decode("#e06666"));
         edit2.setFont(buttonFont);
         edit2.addActionListener(this);
@@ -112,13 +113,6 @@ public class OrderSummary extends Page implements ActionListener{
         dec2.setFont(buttonFont);
         dec2.addActionListener(this);
 
-        // make buttons for third summary
-        edit3 = new JButton("Edit");
-        edit3.setBounds(50*w1p, 89*h1p, 5*w1p, 4*h1p);
-        edit3.setBackground(Color.decode("#e06666"));
-        edit3.setFont(buttonFont);
-        edit3.addActionListener(this);
-        
         inc3 = new JButton("+");
         inc3.setBounds(56*w1p, 89*h1p, 3*w1p, 4*h1p);
         inc3.setBackground(Color.decode("#e06666"));
@@ -235,31 +229,27 @@ public class OrderSummary extends Page implements ActionListener{
 
         // make extras object to be displayed on the screen
         try{
-            extras = currentOrder.getExtras();
+            sides = currentOrder.getSides();
             //make sides text
             String sideDesc = "";
-            sideDesc += extras.getSides();
+            sideDesc += sides.getSides();
             sidesItem.setText(sideDesc);
-            sideQty.setText(extras.getSideQty());
-            sidePrice.setText(extras.getSideCost());
-            sideTotal.setText(extras.getSideCost());
+            sideQty.setText(sides.getSideQty());
+            sidePrice.setText(sides.getSideCost());
+            sideTotal.setText(sides.getSideCost());
             
+            drinks = currentOrder.getDrinks();
             //make drink text
             String drinkDesc = "";
-            drinkDesc += extras.getDrinks();
+            drinkDesc += drinks.getDrinks();
             drinkItem.setText(drinkDesc);
-            drinkQty.setText(extras.getDrinkQty());
-            drinkPrice.setText(extras.getDrinkCost());
-            drinkTotal.setText(extras.getDrinkCost());
+            drinkQty.setText(drinks.getDrinkQty());
+            drinkPrice.setText(drinks.getDrinkCost());
+            drinkTotal.setText(drinks.getDrinkCost());
         }catch(NullPointerException npe){
             sidesItem.setText("");
             drinkItem.setText("");
         }
-        
-        
-
-
-
 
         // add buttons to frame
         this.add(back);
@@ -277,7 +267,7 @@ public class OrderSummary extends Page implements ActionListener{
         this.add(extrasLabel); this.add(qty2); this.add(each2); this.add(total2);
         this.add(edit2); this.add(inc2); this.add(dec2);
         // add buttons for thirds summary
-        this.add(edit3); this.add(inc3); this.add(dec3);
+        this.add(inc3); this.add(dec3);
 
         // set the layout for the frame
         this.getContentPane().setLayout(null);
@@ -295,15 +285,11 @@ public class OrderSummary extends Page implements ActionListener{
 
     @Override
      public void actionPerformed(ActionEvent e){
-        // back button
-        if(e.getActionCommand().equals("Back")){
-            new PizzaMenu().showPizzaMenu(true);
-            this.dispose();
         //Check out button
-        }else if(e.getActionCommand().equals("Check Out")){
+        if(e.getActionCommand().equals("Check Out")){
             new PaymentMethod().showPaymentMethod(true);
             this.dispose();
-            if(Integer.parseInt(pizza.getQty()) == 0){
+            if(Integer.parseInt(pizza.getQty()) == 0 && Integer.parseInt(sides.getSideQty()) == 0 && Integer.parseInt(drinks.getDrinkQty()) == 0){
                 JOptionPane.showMessageDialog(null, "Must have at least one item","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
             }
         }else if(e.getSource().equals(inc1)){
@@ -325,15 +311,16 @@ public class OrderSummary extends Page implements ActionListener{
             }
         }else if(e.getSource().equals(edit1)){
             new PizzaMenu().showPizzaMenu(true);
+            currentOrder.deletePizza();
             this.dispose();
         }else if(e.getSource().equals(inc2)){
             try{
-                extras.incSideQty();
-                if(Integer.parseInt(extras.getSideQty()) > 10){
-                    extras.decSideQty();
+                sides.incSideQty();
+                if(Integer.parseInt(sides.getSideQty()) > 10){
+                    sides.decSideQty();
                 }else{
-                    sideQty.setText(extras.getSideQty());
-                    sideTotal.setText(extras.getSideCost());
+                    sideQty.setText(sides.getSideQty());
+                    sideTotal.setText(sides.getSideCost());
                 }
             }catch(NullPointerException npe){
 
@@ -341,41 +328,46 @@ public class OrderSummary extends Page implements ActionListener{
             
         }else if(e.getSource().equals(dec2)){
             try{
-                 extras.decSideQty();
-                if(Integer.parseInt(extras.getSideQty()) < 0){
-                    extras.incSideQty();
+                 sides.decSideQty();
+                if(Integer.parseInt(sides.getSideQty()) < 0){
+                    sides.incSideQty();
                 }else{
-                    sideQty.setText(extras.getSideQty());
-                    sideTotal.setText(extras.getSideCost());
+                    sideQty.setText(sides.getSideQty());
+                    sideTotal.setText(sides.getSideCost());
                 }
             }catch(NullPointerException npe){
 
             }           
         }else if(e.getSource().equals(inc3)){
             try{
-                extras.incDrinkQty();
-                if(Integer.parseInt(extras.getDrinkQty()) > 10){
-                    extras.decDrinkQty();
+                drinks.incDrinkQty();
+                if(Integer.parseInt(drinks.getDrinkQty()) > 10){
+                    drinks.decDrinkQty();
                 }else{
-                    drinkQty.setText(extras.getDrinkQty());
-                    drinkTotal.setText(extras.getDrinkCost());
+                    drinkQty.setText(drinks.getDrinkQty());
+                    drinkTotal.setText(drinks.getDrinkCost());
                 }
             }catch(NullPointerException npe){
         
             }
         }else if(e.getSource().equals(dec3)){
             try{
-                extras.decDrinkQty();
-                if(Integer.parseInt(extras.getDrinkQty()) < 0){
-                    extras.incDrinkQty();
+                drinks.decDrinkQty();
+                if(Integer.parseInt(drinks.getDrinkQty()) < 0){
+                    drinks.incDrinkQty();
                 }else{
-                    drinkQty.setText(extras.getDrinkQty());
-                    drinkTotal.setText(extras.getDrinkCost());
+                    drinkQty.setText(drinks.getDrinkQty());
+                    drinkTotal.setText(drinks.getDrinkCost());
                 } 
             }catch(NullPointerException npe){
                 
             }
-        }  
+        } else if(e.getSource().equals(edit2)){
+            new ExtrasMenu().showExtrasMenu(true);
+            currentOrder.deleteDrinks();
+            currentOrder.deletSides();
+            this.dispose();
+        }
 
      }
 }    

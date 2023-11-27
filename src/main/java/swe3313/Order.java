@@ -4,37 +4,49 @@ import java.util.ArrayList;
 
 public class Order {
     Pizza pizzas;
-    Extras extras;
+    Drink drinks;
+    Sides sides;
     double orderCost = 0f;
     String paymentMethod;
     boolean isDelivery;
 
     public Order(){
         pizzas = null;
-        extras = null;
+        drinks = null;
+        sides = null;
     }
 
 
-    public Order (Pizza p, Extras e){
+    public Order (Pizza p, Drink d, Sides s){
         pizzas = p;
-        extras = e;
+        drinks = d;
+        sides = s;
     }
 
     public void addToOrder(Pizza p){
         pizzas = p;
     }
 
-    public void addToOrder(Extras e){
-        extras = e;
+    public void addToOrder(Drink d){
+        drinks = d;
     }
+
+    public void addToOrder(Sides s){
+        sides = s;
+    }
+
     
     //getters for pizzas and extras
     public Pizza getPizzas(){
         return pizzas;
     }
 
-    public Extras getExtras(){
-        return extras;
+    public Drink getDrinks(){
+        return drinks;
+    }
+
+    public Sides getSides(){
+        return sides;
     }
 
     // setters for isDelivery and payment method
@@ -49,8 +61,8 @@ public class Order {
     // calculate order cost
     public double calcCost(){
         orderCost += pizzas.calcCost();
-        orderCost += extras.calcDrinkCost();
-        orderCost += extras.calcSideCost();
+        orderCost += drinks.calcDrinkCost();
+        orderCost += sides.calcSideCost();
         orderCost += (orderCost/10); 
         return Math.round(orderCost * 100.0) / 100.0;
     }
@@ -61,9 +73,12 @@ public class Order {
     }
 
     // delete extras items
-    public void deleteExtras(){
-        extras = null;
+    public void deleteDrinks(){
+        drinks = null;
     }
 
+    public void deleteSides(){
+        sides = null;
+    }
 
 }

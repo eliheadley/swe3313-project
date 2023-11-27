@@ -58,9 +58,20 @@ public class Order {
     // calculate order cost
     public double calcCost(){
         orderCost += pizzas.calcCost();
-        orderCost += extras.calcCost();
+        orderCost += extras.calcDrinkCost();
+        orderCost += extras.calcSideCost();
         orderCost += (orderCost/10); 
         return Math.round(orderCost * 100.0) / 100.0;
+    }
+
+    // delete pizza items
+    public void deletePizza(){
+        pizzas = null;
+    }
+
+    // delete extras items
+    public void deleteExtras(){
+        extras = null;
     }
 
 

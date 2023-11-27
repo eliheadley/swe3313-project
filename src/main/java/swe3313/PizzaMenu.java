@@ -13,7 +13,7 @@ public class PizzaMenu extends Page implements ActionListener {
     extraCheeseCheckbox, extraSauceCheckbox, smallCheckbox, mediumCheckbox, largeCheckbox, exLargeCheckbox, thinCheckbox,
     regularCheckbox, panCheckbox;
     Font font1, font2, titleFont, buttonFont, checkBoxFont;
-    JButton continueButton, backButton, addToOrderButton;
+    JButton backButton, addToOrderButton;
     Pizza pizza;
     int pizzaCount;
 
@@ -180,15 +180,9 @@ public class PizzaMenu extends Page implements ActionListener {
         backButton.setBackground(Color.decode("#e06666"));
         backButton.setFont(buttonFont);
         backButton.addActionListener(this);
-        //create continue button and set layout
-        continueButton = new JButton("Continue");
-        continueButton.setBounds(87*w1p,h5p,10*w1p, 7*h1p);
-        continueButton.setBackground(Color.decode("#e06666"));
-        continueButton.setFont(buttonFont);
-        continueButton.addActionListener(this);
         //create addToOrderButton and set layout
         addToOrderButton = new JButton("Add to Order");
-        addToOrderButton.setBounds(87*w1p,17*h5p,10*w1p, 7*h1p);
+        addToOrderButton.setBounds(87*w1p,h5p,10*w1p, 7*h1p);
         addToOrderButton.setBackground(Color.decode("#e06666"));
         addToOrderButton.setFont(buttonFont);
         addToOrderButton.addActionListener(this);
@@ -229,7 +223,6 @@ public class PizzaMenu extends Page implements ActionListener {
         this.add(toppingsPanel);
         this.add(leftPanel);
         this.add(backButton);
-        this.add(continueButton);
         this.add(addToOrderButton);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -285,10 +278,10 @@ public class PizzaMenu extends Page implements ActionListener {
        }else if(e.getActionCommand().equals("Back")){
            new MainPage().showMain(true);
            this.dispose();
-       }else if(e.getActionCommand().equals("Continue")){
-           new ExtrasMenu().showExtrasMenu(true);
-           this.dispose();
        }else if(e.getActionCommand().equals("Add to Order")){
+            if(currentOrder.pizzas != null){
+                currentOrder.deletePizza();
+            }
             ArrayList<String> vegToppings = new ArrayList<>();
             if (onionCheckbox.isSelected()) {
                 vegToppings.add("onions");
@@ -337,15 +330,16 @@ public class PizzaMenu extends Page implements ActionListener {
                 crust = "pan";
             }
 
-            if(validateSelection()){
+            int valid = validateSelection();
+            if(valid == 0){
                 JOptionPane.showMessageDialog(null, "Must select both pizza size and crust style","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
-            }else if (currentOrder.getPizzaCount() > 10){
-                JOptionPane.showMessageDialog(null, "Maxium order size of 10 pizzas","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
             }else{
                  //making the pizza object here
                 pizza = new Pizza(size, crust, vegToppings, meatToppings, otherOption);
                 currentOrder.addToOrder(pizza);
-                currentOrder.incrementPizzaCount();     
+                currentOrder.incrementPizzaCount();
+                new ExtrasMenu().showExtrasMenu(true);
+                this.dispose();     
             }
        }
     }
@@ -356,16 +350,43 @@ public class PizzaMenu extends Page implements ActionListener {
         }
     }
 
-    public boolean validateSelection(){
-         if(!(smallCheckbox.isSelected()) && !(mediumCheckbox.isSelected()) && !(largeCheckbox.isSelected()) && !(exLargeCheckbox.isSelected())){
+    private int validateSelection(){
+        if(!(smallCheckbox.isSelected()) && !(mediumCheckbox.isSelected()) && !(largeCheckbox.isSelected()) && !(exLargeCheckbox.isSelected())){
             if(thinCheckbox.isSelected() || regularCheckbox.isSelected() || panCheckbox.isSelected()){
-                return true;
+                return 0;
             }
          }else if(!(thinCheckbox.isSelected() || regularCheckbox.isSelected() || panCheckbox.isSelected())){
             if(smallCheckbox.isSelected() || mediumCheckbox.isSelected() || largeCheckbox.isSelected() || exLargeCheckbox.isSelected()){
-                return true;
+                return 0;
             }
+         }if(!(smallCheckbox.isSelected()) && !(mediumCheckbox.isSelected()) && !(largeCheckbox.isSelected()) && !(exLargeCheckbox.isSelected()) && !(regularCheckbox.isSelected())&& !(thinCheckbox.isSelected()) && !(panCheckbox.isSelected())){
+            return 0;
          }
-         return false;
+         return 1;
+
+    }
+
+    private void selectCheckBoxes(boolean[] arr){
+        // sm, md, lar, xl, reg, thin, pan, oni, tom, mush, pin, pep, ham, saus, ech, esc
+        smallCheckbox.setSelected(arr[0]);
+        mediumCheckbox.setSelected(arr[1]);
+        largeCheckbox.setSelected(arr[2]);
+        exLargeCheckbox.setSelected(arr[3]);
+
+        regularCheckbox.setSelected(arr[4]);
+        thinCheckbox.setSelected(arr[5]);
+        panCheckbox.setSelected(arr[6]);
+
+        onionCheckbox.setSelected(arr[7]);
+        tomatoesCheckbox.setSelected(arr[8]);
+        mushroomCheckbox.setSelected(arr[9]);
+        pineapplesCheckbox.setSelected(arr[10]);
+
+        pepperoniCheckbox.setSelected(arr[11]);
+        hamCheckbox.setSelected(arr[12]);
+        sausageCheckbox.setSelected(arr[13]);
+
+        extraCheeseCheckbox.setSelected(arr[14]);
+        extraSauceCheckbox.setSelected(arr[15]);
     }
 }

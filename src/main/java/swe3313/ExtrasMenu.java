@@ -11,7 +11,7 @@ public class ExtrasMenu extends Page implements ActionListener {
     JLabel drinksLabel, drinkSizeLabel, sidesLabel, title, pricing;
     JCheckBox pepsi, dietPepsi, orange, dietOrange, rootBeer, dietRB, sierraMist, lemonade, small,
     medium, large, breadSticks, breadSticksBites, cookie;
-    JButton finishButton, backButton, addToOrderButton;
+    JButton finishButton, backButton;
     Font font1, font2, titleFont, buttonFont, checkBoxFont;
 
     public ExtrasMenu(){
@@ -142,12 +142,6 @@ public class ExtrasMenu extends Page implements ActionListener {
         backButton.setBackground(Color.decode("#e06666"));
         backButton.setFont(buttonFont);
         backButton.addActionListener(this);
-        //create addToOrderButton and set layout
-        addToOrderButton = new JButton("Add to Order");
-        addToOrderButton.setBounds(87*w1p,17*h5p,10*w1p, 7*h1p);
-        addToOrderButton.setBackground(Color.decode("#e06666"));
-        addToOrderButton.setFont(buttonFont);
-        addToOrderButton.addActionListener(this);
 
         // create title
         title = new JLabel("Extras");
@@ -182,7 +176,6 @@ public class ExtrasMenu extends Page implements ActionListener {
         this.add(title);
         this.add(backButton);
         this.add(finishButton);
-        this.add(addToOrderButton);
         this.add(rightPanel);
         this.add(leftPanel);
         this.add(drinksLabel);
@@ -208,44 +201,7 @@ public class ExtrasMenu extends Page implements ActionListener {
             new PizzaMenu().showPizzaMenu(true);
             this.dispose();        
         }else if(e.getActionCommand().equals("Finish")){
-            new OrderSummary().showOrderSummary(true);
-            this.dispose();
-        //Checkboxes
-        }else if(e.getActionCommand().equals("Small  ")){
-            if (small.isSelected()) {
-                      medium.setSelected(false);
-                      large.setSelected(false);
-              }
-        }else if(e.getActionCommand().equals("Medium  ")){
-              if (medium.isSelected()) {
-                  small.setSelected(false);
-                  large.setSelected(false);
-              }
-        }else if(e.getActionCommand().equals("Large  ")){
-              if (large.isSelected()) {
-                  small.setSelected(false);
-                  medium.setSelected(false);
-               }
-    
-        }else if(e.getActionCommand().equals("Pepsi")){
-            selectDrink("Pepsi");
-        }else if(e.getActionCommand().equals("Diet Pepsi")){
-            selectDrink("Diet Pepsi");
-        }else if(e.getActionCommand().equals("Orange")){
-            selectDrink("Orange");
-        }else if(e.getActionCommand().equals("Diet Orange")){
-            selectDrink("Diet Orange");
-        }else if(e.getActionCommand().equals("Root Beer")){
-            selectDrink("Root Beer");
-        }else if(e.getActionCommand().equals("Diet Root Beer")){
-            selectDrink("Diet Root Beer");
-        }else if(e.getActionCommand().equals("Sierra Mist")){
-            selectDrink("Sierra Mist");
-        }else if(e.getActionCommand().equals("Lemonade")){
-            selectDrink("Lemonade");
-        }else if(e.getActionCommand().equals("Add to Order")){
-           
-            // set the drink size
+             // set the drink size
             String size = "";
             if (small.isSelected()) {
                 size = "Small";
@@ -290,7 +246,45 @@ public class ExtrasMenu extends Page implements ActionListener {
             }else{
                 Extras extras = new Extras(size, drinkChoice, sides);
                 currentOrder.addToOrder(extras);
+                new OrderSummary().showOrderSummary(true);
+                this.dispose();
             }
+        //Checkboxes
+        }else if(e.getActionCommand().equals("Small  ")){
+            if (small.isSelected()) {
+                      medium.setSelected(false);
+                      large.setSelected(false);
+              }
+        }else if(e.getActionCommand().equals("Medium  ")){
+              if (medium.isSelected()) {
+                  small.setSelected(false);
+                  large.setSelected(false);
+              }
+        }else if(e.getActionCommand().equals("Large  ")){
+              if (large.isSelected()) {
+                  small.setSelected(false);
+                  medium.setSelected(false);
+               }
+    
+        }else if(e.getActionCommand().equals("Pepsi")){
+            selectDrink("Pepsi");
+        }else if(e.getActionCommand().equals("Diet Pepsi")){
+            selectDrink("Diet Pepsi");
+        }else if(e.getActionCommand().equals("Orange")){
+            selectDrink("Orange");
+        }else if(e.getActionCommand().equals("Diet Orange")){
+            selectDrink("Diet Orange");
+        }else if(e.getActionCommand().equals("Root Beer")){
+            selectDrink("Root Beer");
+        }else if(e.getActionCommand().equals("Diet Root Beer")){
+            selectDrink("Diet Root Beer");
+        }else if(e.getActionCommand().equals("Sierra Mist")){
+            selectDrink("Sierra Mist");
+        }else if(e.getActionCommand().equals("Lemonade")){
+            selectDrink("Lemonade");
+        }else if(e.getActionCommand().equals("Add to Order")){
+           
+           
             
         }
     }

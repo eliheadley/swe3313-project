@@ -8,7 +8,6 @@ public class Pizza {
     ArrayList <String> toppingsVeg = new ArrayList<>();
     ArrayList <String> toppingsMeat = new ArrayList<>();
     ArrayList <String> other = new ArrayList<>();
-    double cost = 0f;
     int qty = 0;
 
     // Overloade constuctors
@@ -17,54 +16,16 @@ public class Pizza {
         crust = c;
         qty++;
     }
-
-    public Pizza(String s, String c, ArrayList<String> t){
-        size = s;
-        crust = c;
-        qty++;
-        for(String x : t){
-            if(x.equals("Onion") || x.equals("Tomatoes") || x.equals("Mushroom") || x.equals("Pineapples")){
-                 toppingsVeg = t;
-            }else if(x.equals("Pepperoni") || x.equals("Sausage") || x.equals("Ham")){
-                toppingsMeat = t;
-            }else if(x.equals("Extra Cheese") || x.equals("Extra Sauce")){
-                other = t;
-            }
-        }
-       
-    }
-
-    public Pizza(String s, String c, ArrayList<String> t1, ArrayList<String> t2){
-        size = s;
-        crust = c;
-        qty++;
-        for(String x : t1){
-            if(x.equals("Onion") || x.equals("Tomatoes") || x.equals("Mushroom") || x.equals("Pineapples")){
-                 toppingsVeg = t1;
-            }else if(x.equals("Pepperoni") || x.equals("Sausage") || x.equals("Ham")){
-                toppingsMeat = t1;
-            }else if(x.equals("Extra Cheese") || x.equals("Extra Sauce")){
-                other = t1;
-            }
-        }
-        for(String x : t2){
-            if(x.equals("Onion") || x.equals("Tomatoes") || x.equals("Mushroom") || x.equals("Pineapples")){
-                 toppingsVeg = t2;
-            }else if(x.equals("Pepperoni") || x.equals("Sausage") || x.equals("Ham")){
-                toppingsMeat = t2;
-            }else if(x.equals("Extra Cheese") || x.equals("Extra Sauce")){
-                other = t2;
-            }
-        }
-    }
-
+    
     public Pizza(String s, String c, ArrayList<String> tV, ArrayList<String> tM,ArrayList<String> o){
         size = s;
         crust = c;
         toppingsVeg = tV;
         toppingsMeat = tM;
         other = o;
-        qty++;
+        qty = 0;
+        ++qty;
+
     }
 
 
@@ -85,6 +46,7 @@ public class Pizza {
     }
 
     public double calcCost(){
+        double cost = 0;
         if(size == "Small"){
             cost += 4.00;
             cost += (0.50 * toppingsVeg.size());
@@ -118,13 +80,30 @@ public class Pizza {
                 cost -= 1.25;
             }
         }
-        cost *= qty;
-        return Math.round(cost * 100.0) / 100.0;
+        return cost * qty;
     }
 
     // increase quantity
     public void incQty(){
         qty++;
+    }
+     
+    public void decQty(){
+        qty--;
+    }
+
+    // getter for quantity
+    public String getQty(){
+        String s = "";
+        s += qty;
+        return s;
+    }
+
+    // get cost
+    public String getCost(){
+        double c = calcCost();
+        String cost = "$" + String.format("%.2f", c);
+        return cost;
     }
 
 }

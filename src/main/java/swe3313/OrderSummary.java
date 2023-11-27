@@ -232,6 +232,9 @@ public class OrderSummary extends Page implements ActionListener{
             sidePrice.setText(sides.getSideCost());
             sideTotal.setText(sides.getSideCost());
             
+        }catch(NullPointerException npe){
+            sidesItem.setText("");
+        }try{
             drinks = currentOrder.getDrinks();
             //make drink text
             String drinkDesc = "";
@@ -241,7 +244,6 @@ public class OrderSummary extends Page implements ActionListener{
             drinkPrice.setText(drinks.getDrinkCost());
             drinkTotal.setText(drinks.getDrinkCost());
         }catch(NullPointerException npe){
-            sidesItem.setText("");
             drinkItem.setText("");
         }
 

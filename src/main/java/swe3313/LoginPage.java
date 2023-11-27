@@ -96,6 +96,7 @@ public class LoginPage extends Page implements ActionListener {
             }
             if(matched){
                 if(user[6].toLowerCase().equals("customer")){
+                    currentOrder.setPhoneNumber(user[1]);
                     new PizzaMenu().showPizzaMenu(true);
                 }else if(user[6].toLowerCase().equals("employee")){
                     new EmployeePage().showEmployee(true);

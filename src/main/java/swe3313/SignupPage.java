@@ -113,6 +113,7 @@ public class SignupPage extends Page implements ActionListener{
             try{
                 validateInputs();
                 new Database().insertUser(tPhoneNumber.getText(), Password.generateStorngPasswordHash(tPassword.getText()), tFirstName.getText(), tLastName.getText(), tPayment.getText(), tAddress.getText());
+                currentOrder.setPhoneNumber(tPhoneNumber.getText());
                 new PizzaMenu().showPizzaMenu(true);
                 this.dispose();
             }catch(InvalidInputException iie){

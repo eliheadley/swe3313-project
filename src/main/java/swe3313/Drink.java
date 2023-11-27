@@ -4,7 +4,7 @@ package swe3313;
 public class Drink {
     String drinkSize;
     String drinkChoice;
-    int drinkQty= 0;
+    int drinkQty = 0;
 
     public Drink(String s, String dO){
         drinkSize = s;

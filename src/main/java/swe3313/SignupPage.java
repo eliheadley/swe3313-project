@@ -142,6 +142,11 @@ public class SignupPage extends Page implements ActionListener{
                 }
             }
 
+            // check for exisitng
+            if((new Database().getUser(phone)) != null){
+                throw new InvalidInputException("This Phone Number is already tied to an existing account");
+            }
+
             // check password field
             String password = tPassword.getText();
             if(password.length() < 8 || password.length() > 25){

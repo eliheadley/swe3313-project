@@ -196,11 +196,7 @@ public class ExtrasMenu extends Page implements ActionListener {
     //back button
     @Override
     public void actionPerformed(ActionEvent e){
-        //back button
-        if(e.getActionCommand().equals("Back")){
-            new PizzaMenu().showPizzaMenu(true);
-            this.dispose();        
-        }else if(e.getActionCommand().equals("Finish")){
+        if(e.getSource().equals(finishButton)){
              // set the drink size
             String size = "";
             if (small.isSelected()) {
@@ -244,10 +240,15 @@ public class ExtrasMenu extends Page implements ActionListener {
             if(validateSelection()){
                 JOptionPane.showMessageDialog(null, "Must select both drink and size","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
             }else{
-                Drink drinks = new Drink(size, drinkChoice);
-                Sides sideObj = new Sides(sides);
-                currentOrder.addToOrder(drinks);
-                currentOrder.addToOrder(sideObj);
+
+                if(size.length() > 0 && drinkChoice.length() > 0){
+                    Drink drinks = new Drink(size, drinkChoice);
+                    currentOrder.addToOrder(drinks);
+                }
+                if(sides.size() > 0){
+                    Sides sideObj = new Sides(sides);
+                    currentOrder.addToOrder(sideObj);
+                }              
                 new OrderSummary().showOrderSummary(true);
                 this.dispose();
             }
@@ -284,10 +285,6 @@ public class ExtrasMenu extends Page implements ActionListener {
             selectDrink("Sierra Mist");
         }else if(e.getActionCommand().equals("Lemonade")){
             selectDrink("Lemonade");
-        }else if(e.getActionCommand().equals("Add to Order")){
-           
-           
-            
         }
     }
 
@@ -332,14 +329,19 @@ public class ExtrasMenu extends Page implements ActionListener {
     }
 
     public boolean validateSelection(){
+         
          if(!(small.isSelected()) && !(medium.isSelected()) && !(large.isSelected())){
             if(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected()){
                 return true;
             }
-         }else if(!(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected())){
+         }
+         if(!(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected())){
             if(small.isSelected() || medium.isSelected() || large.isSelected()){
                 return true;
             }
+         }
+         if(breadSticks.isSelected() || breadSticksBites.isSelected() || cookie.isSelected()){
+            return false;
          }
          return false;
     }

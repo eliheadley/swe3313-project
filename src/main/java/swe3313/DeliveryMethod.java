@@ -26,11 +26,6 @@ public class DeliveryMethod extends Page implements ActionListener{
         title.setBounds((6*w5p), h5p, 700, 60);
         title.setFont(titleFont);
 
-        /*  !!! Create logo using a icon
-        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
-        img.setBounds((7*w5p), 3*h5p, 438, 438);
-        this.add(img); */
-
          //back button
          backButton = new JButton("Back");
          backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
@@ -149,8 +144,13 @@ public class DeliveryMethod extends Page implements ActionListener{
                 }else{
                     currentOrder.setDeliveryMethod(false);
                 }
-                new CreditInfo().showCreditInfo(true);
-                this.dispose();
+                if(currentOrder.paymentMethod.equalsIgnoreCase("credit")){
+                    new CreditInfo().showCreditInfo(true);
+                    this.dispose();
+                }else{
+                    new Receipt().showReceipt(true);
+                }
+                
             }
         }
      }

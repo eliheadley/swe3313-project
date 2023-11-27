@@ -337,8 +337,13 @@ public class PizzaMenu extends Page implements ActionListener {
                  //making the pizza object here
                 pizza = new Pizza(size, crust, vegToppings, meatToppings, otherOption);
                 currentOrder.addToOrder(pizza);
-                new ExtrasMenu().showExtrasMenu(true);
-                this.dispose();     
+                if(currentOrder.drinks != null || currentOrder.sides != null){
+                    new OrderSummary().showOrderSummary(true);
+                }else{
+                    new ExtrasMenu().showExtrasMenu(true);
+                    this.dispose();    
+                }
+                 
             }
        }
     }

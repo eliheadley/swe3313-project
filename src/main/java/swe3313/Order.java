@@ -1,6 +1,5 @@
 package swe3313;
 
-import java.util.ArrayList;
 
 public class Order {
     Pizza pizzas;
@@ -68,8 +67,7 @@ public class Order {
         orderCost = 0;
         orderCost += pizzas.calcCost();
         orderCost += drinks.calcDrinkCost();
-        orderCost += sides.calcSideCost();
-        orderCost += (orderCost/10); 
+        orderCost += sides.calcSideCost(); 
         orderCost += tip;
         return Math.round(orderCost * 100.0) / 100.0;
     }
@@ -92,8 +90,9 @@ public class Order {
         this.tip = tip;
     }
 
-    public double getTip(){
-        return tip;
+    public String getTip(){
+        String cost = "$" + String.format("%.2f", tip);
+        return cost;
     }
 
     public void setSignature(String s){
@@ -102,6 +101,12 @@ public class Order {
 
     public String getSignature(){
         return signature;
+    }
+
+    public String getCost(){
+        double c = calcCost();
+        String cost = "$" + String.format("%.2f", c);
+        return cost;
     }
 
 }

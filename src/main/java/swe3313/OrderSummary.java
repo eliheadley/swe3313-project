@@ -13,7 +13,7 @@ public class OrderSummary extends Page implements ActionListener{
     Font buttonFont, textFont, titleFont;
     JTextArea pizzaItem, drinkItem, sidesItem, pizzaQty, pizzaPrice, pizzaTotal, sideQty, sidePrice, sideTotal,
     drinkQty, drinkPrice, drinkTotal;
-    Pizza  pizza = new Pizza("Extra Large", "Regular");
+    Pizza  pizza;
     Extras extras;
 
     public OrderSummary(){
@@ -220,7 +220,8 @@ public class OrderSummary extends Page implements ActionListener{
 
 
         // make pizza object to be displayed on the screen
-        try{           
+        try{ 
+            pizza = currentOrder.getPizzas();          
             String pizzaDesc = "";
             pizzaDesc += pizza;
             pizzaItem.setText(pizzaDesc);
@@ -364,9 +365,9 @@ public class OrderSummary extends Page implements ActionListener{
             }
         }else if(e.getSource().equals(dec3)){
             try{
-                extras.decSideQty();
+                extras.decDrinkQty();
                 if(Integer.parseInt(extras.getDrinkQty()) < 0){
-                    extras.incSideQty();
+                    extras.incDrinkQty();
                 }else{
                     drinkQty.setText(extras.getDrinkQty());
                     drinkTotal.setText(extras.getDrinkCost());

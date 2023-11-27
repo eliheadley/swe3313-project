@@ -8,7 +8,6 @@ public class Order {
     double orderCost = 0f;
     String paymentMethod;
     boolean isDelivery;
-    int pizzaCount = 0;
 
     public Order(){
         pizzas = null;
@@ -27,14 +26,6 @@ public class Order {
 
     public void addToOrder(Extras e){
         extras = e;
-    }
-
-    // getter and setter for pizza count
-    public int getPizzaCount(){
-        return pizzaCount;
-    }
-    public  void incrementPizzaCount(){
-        pizzaCount++;
     }
     
     //getters for pizzas and extras

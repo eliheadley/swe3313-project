@@ -337,7 +337,6 @@ public class PizzaMenu extends Page implements ActionListener {
                  //making the pizza object here
                 pizza = new Pizza(size, crust, vegToppings, meatToppings, otherOption);
                 currentOrder.addToOrder(pizza);
-                currentOrder.incrementPizzaCount();
                 new ExtrasMenu().showExtrasMenu(true);
                 this.dispose();     
             }
@@ -364,29 +363,5 @@ public class PizzaMenu extends Page implements ActionListener {
          }
          return 1;
 
-    }
-
-    private void selectCheckBoxes(boolean[] arr){
-        // sm, md, lar, xl, reg, thin, pan, oni, tom, mush, pin, pep, ham, saus, ech, esc
-        smallCheckbox.setSelected(arr[0]);
-        mediumCheckbox.setSelected(arr[1]);
-        largeCheckbox.setSelected(arr[2]);
-        exLargeCheckbox.setSelected(arr[3]);
-
-        regularCheckbox.setSelected(arr[4]);
-        thinCheckbox.setSelected(arr[5]);
-        panCheckbox.setSelected(arr[6]);
-
-        onionCheckbox.setSelected(arr[7]);
-        tomatoesCheckbox.setSelected(arr[8]);
-        mushroomCheckbox.setSelected(arr[9]);
-        pineapplesCheckbox.setSelected(arr[10]);
-
-        pepperoniCheckbox.setSelected(arr[11]);
-        hamCheckbox.setSelected(arr[12]);
-        sausageCheckbox.setSelected(arr[13]);
-
-        extraCheeseCheckbox.setSelected(arr[14]);
-        extraSauceCheckbox.setSelected(arr[15]);
     }
 }

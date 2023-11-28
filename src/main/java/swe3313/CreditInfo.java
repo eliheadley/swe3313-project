@@ -1,20 +1,18 @@
 package swe3313;
 
 import java.awt.event.*;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.Calendar;
 
 public class CreditInfo extends Page implements ActionListener {
-    String cardNumber, name, exp, cvv, month, year;
+    String cardNumber, name, exp, cvv;
     //Create textfields
     JTextField cardTxtIn, nameTxtIn, expTxtIn, cvvTxtIn;
     JPanel creditInfoPanel1, creditInfoPanel2;
-    JLabel title, cardLabel, nameLabel, expLabel, cvvLabel, img1, img2, img3;
+    JLabel title, cardLabel, nameLabel, expLabel, cvvLabel;
     Font font, textFont, titleFont, buttonFont;
     //Create buttons
     JButton payNow;
@@ -24,37 +22,10 @@ public class CreditInfo extends Page implements ActionListener {
         titleFont = new Font("Impact", Font.PLAIN, 28);
         buttonFont = new Font("Impact", Font.PLAIN, 20);
 
-        
-        //Create logo using a icon
-        try {
-            InputStream stream1 = getClass().getResourceAsStream("/Lock.png");
-                img1 = new JLabel(new ImageIcon(ImageIO.read(stream1)));
-                img1.setBounds(44*w1p, h1p, 250, 250);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        try {
-           InputStream stream = getClass().getResourceAsStream("/Visa.png");
-            img2 = new JLabel(new ImageIcon(ImageIO.read(stream)));
-            img2.setBounds(21*w1p, 10*h1p, 250, 100);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        try {
-           InputStream stream = getClass().getResourceAsStream("/MasterCard.png");
-            img3 = new JLabel(new ImageIcon(ImageIO.read(stream)));
-            img3.setBounds(w1p, h1p, 250, 250);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        /*  !!! Create logo using a icon
+        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
+        img.setBounds((7*w5p), 3*h5p, 438, 438);
+        this.add(img); */
 
         //Create text fields to input data
         cardTxtIn = new JTextField();
@@ -75,7 +46,7 @@ public class CreditInfo extends Page implements ActionListener {
 
         //Create labels
         title = new JLabel("Secure Credit Card Payment");
-        title.setBounds((41*w1p), 25*h1p, 400, 50);
+        title.setBounds((8*w5p)+15, 3*h5p, 400, 50);
         title.setFont(titleFont);
 
         cardLabel = new JLabel("Credit Card Number");
@@ -127,9 +98,6 @@ public class CreditInfo extends Page implements ActionListener {
         this.add(expLabel);
         this.add(cvvLabel); 
         this.add(payNow);
-        this.add(img1);
-        this.add(img2);
-        this.add(img3);
 
         //Set layout
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -154,23 +122,49 @@ public class CreditInfo extends Page implements ActionListener {
             name = nameTxtIn.getText();
             name = name.replaceAll("\\s", "");
             exp = expTxtIn.getText();
-            exp = exp.replaceAll("\\s", "/");
-            cvv = cvvTxtIn.getText();
             
-            try{
-                validateInput();
-                new Receipt().showReceipt(true);
-                this.dispose();
-            }catch(InvalidInputException iie){
-                JOptionPane.showMessageDialog(null, iie.getMessage(),"Ivalide input", JOptionPane.ERROR_MESSAGE);
-            }catch(Exception ex){
+            int month = Integer.parseInt(exp.substring(exp.indexOf("/")-2,exp.indexOf("/")));
+            int year = Integer.parseInt(exp.substring(exp.indexOf("/"), exp.indexOf("/")+2));
+            Calendar today = Calendar.getInstance();
+            int todaysMonth = today.MONTH;
+            cvv = cvvTxtIn.getText();
 
-            }
-                
+            //null errors
+            if(cardTxtIn.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Credit Card Number cannot be empty.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
+            }else if(!isNumeric(cardNumber)){
+                JOptionPane.showMessageDialog(this, "Credit Card Number must consist of only numbers.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
+            }else if(nameTxtIn.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Name on Card cannot be empty.", "Name on Card Error", JOptionPane.ERROR_MESSAGE);
+            } else if(expTxtIn.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Expiration Date cannot be empty", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
+            } else if(cvvTxtIn.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Security Code cannot be empty", "Securit Code Error", JOptionPane.ERROR_MESSAGE);
+            }  //card length error
+            else if(cardNumber.length() != 16){ 
+                JOptionPane.showMessageDialog(this, "Credit Card Number must be 16 digits.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
+            } //invalid name error
+            else if(!((name != null) && (!name.equals("")) && (name.matches("^[a-zA-Z]*$")))){ 
+                JOptionPane.showMessageDialog(this, "Name on Card must only be characters A-Z.", "Name on Card Error", JOptionPane.ERROR_MESSAGE);
+            } // invalid exp date error
+            else if(month < 1 || month > 12){ 
+                JOptionPane.showMessageDialog(this, "Expiration Date must be a valid date", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
+             // invalid cvv error
+            }else if(month < todaysMonth && year < 2023){ 
+                JOptionPane.showMessageDialog(this, "Card is Expired.", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
+             // invalid cvv error
+            }else if(cvv == null){ 
+                JOptionPane.showMessageDialog(this, "Security Code must be a valid CVV", "Securit Code Error", JOptionPane.ERROR_MESSAGE);
+            } // go to receipt
+            else{ 
+                new PaymentMethod().showPaymentMethod(true);
+                this.dispose();
+            } 
+        
         } 
     }
     
-    private boolean isNumeric(String strNum) {
+    public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
@@ -181,44 +175,5 @@ public class CreditInfo extends Page implements ActionListener {
         }
         return true;
     }
-
-    private void validateInput() throws InvalidInputException{
-        cardNumber = cardTxtIn.getText();
-        name = nameTxtIn.getText();
-        name = name.replaceAll("\\s", "");
-        exp = expTxtIn.getText();
-        exp = exp.replaceAll("\\s", "/");
-        cvv = cvvTxtIn.getText();
-        
-        if(cardTxtIn.getText().isEmpty()){
-            throw new InvalidInputException("Credit Card Number cannot be empty.");
-        }else if(!isNumeric(cardNumber)){
-            throw new InvalidInputException("Credit Card Number must consist of only numbers.");
-        }else if(cardNumber.length() != 16){
-            throw new InvalidInputException("Name on Card cannot be empty.");
-        }else if(nameTxtIn.getText().isEmpty()){
-            throw new InvalidInputException("Name on Card cannot be empty.");
-        }else if(!((name != null) && (!name.equals("")) && (name.matches("^[a-zA-Z]*$")))){
-            throw new InvalidInputException("Name on Card must only be characters A-Z.");
-        }else if(expTxtIn.getText().isEmpty()){
-            throw new InvalidInputException("Expiration Date cannot be empty");
-        }else if(cvvTxtIn.getText().isEmpty()){
-            throw new InvalidInputException("Security Code cannot be empty");
-        }else if(!isNumeric(cvv)){
-            throw new InvalidInputException("Security Code must be a valid CVV");
-        }else if(cvv.length() != 3){
-            throw new InvalidInputException("Security Code must be a valid CVV");
-        }else if(exp.length() != 5){
-            throw new InvalidInputException("Expiration data must be 5 character data mm/yy");
-        }
-        for(int i = 0; i < exp.length(); i++){
-            if(!(exp.charAt(i) >= 47 && exp.charAt(i) <= 57)){
-                throw new InvalidInputException("Expiration data must only be 0-9 and /");
-            }
-        }
-        
-    }
-
-
     
 }

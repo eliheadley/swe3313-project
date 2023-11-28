@@ -1,29 +1,112 @@
 package swe3313;
 
-import java.util.ArrayList;
 
 public class Order {
-    Pizza pizza;
-    Extras extras;
+    Pizza pizzas;
+    Drink drinks;
+    Sides sides;
+    double orderCost;
+    String paymentMethod;
+    boolean isDelivery;
+    String signature;
+    double tip;
 
 
-    public Order (Pizza p, Extras e){
-        pizza = p;
-        extras = e;
+    public Order(){
+        pizzas = null;
+        drinks = null;
+        sides = null;
+        tip = 0;
     }
 
-    public static void printOrder(Pizza p, Extras e){
-        System.out.println(p.size);
-        System.out.println(p.crust);
 
-        for (String t : p.toppingsVeg){
-            System.out.println(t);
-        }
-
-        for (String t : p.toppingsMeat){
-            System.out.println(t);
-        }
-
-
+    public Order (Pizza p, Drink d, Sides s){
+        pizzas = p;
+        drinks = d;
+        sides = s;
+        tip = 0;
     }
+
+    public void addToOrder(Pizza p){
+        pizzas = p;
+    }
+
+    public void addToOrder(Drink d){
+        drinks = d;
+    }
+
+    public void addToOrder(Sides s){
+        sides = s;
+    }
+
+    
+    //getters for pizzas and extras
+    public Pizza getPizzas(){
+        return pizzas;
+    }
+
+    public Drink getDrinks(){
+        return drinks;
+    }
+
+    public Sides getSides(){
+        return sides;
+    }
+
+    // setters for isDelivery and payment method
+    public void setDeliveryMethod(boolean isDelivery){
+        this.isDelivery = isDelivery;
+    }
+
+    public void setPaymentMethod(String s){
+        paymentMethod = s;
+    }
+
+    // calculate order cost
+    public double calcCost(){
+        orderCost = 0;
+        orderCost += pizzas.calcCost();
+        orderCost += drinks.calcDrinkCost();
+        orderCost += sides.calcSideCost(); 
+        orderCost += tip;
+        return Math.round(orderCost * 100.0) / 100.0;
+    }
+
+    // delete pizza items
+    public void deletePizza(){
+        pizzas = null;
+    }
+
+    // delete extras items
+    public void deleteDrinks(){
+        drinks = null;
+    }
+
+    public void deleteSides(){
+        sides = null;
+    }
+
+    public void setTip(double tip){
+        this.tip = tip;
+    }
+
+    public String getTip(){
+        String cost = "$" + String.format("%.2f", tip);
+        return cost;
+    }
+
+    public void setSignature(String s){
+        signature = s;
+    }
+
+    public String getSignature(){
+        return signature;
+    }
+
+    public String getCost(){
+        double c = calcCost();
+        String cost = "$" + String.format("%.2f", c);
+        return cost;
+    }
+
 }

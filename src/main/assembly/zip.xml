@@ -14,8 +14,20 @@
     </fileSets>
     <files>
         <file>
-            <source> ${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
+            <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
             <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/src/main/resources/run.bat</source>
+            <destName>run.bat</destName>
+        </file>
+        <file>
+            <source>${project.basedir}/src/main/resources/hsqldb-2.7.2.jar</source>
+            <destName>hsqldb-2.7.2.jar</destName>
+        </file>
+        <file>
+            <source>${project.basedir}/src/main/resources/MomAndPizza.png</source>
+            <destName>MomAndPizza.png</destName>
         </file>
     </files>
     <dependencySets>

@@ -4,13 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ExtrasMenu extends Page implements ActionListener {
     JPanel rightPanel, drinkChoices, drinkSizes, leftPanel, pepsi_oragange, rtBeer_lemonade;
-    JLabel drinksLabel, drinkSizeLabel, sidesLabel, title;
+    JLabel drinksLabel, drinkSizeLabel, sidesLabel, title, pricing;
     JCheckBox pepsi, dietPepsi, orange, dietOrange, rootBeer, dietRB, sierraMist, lemonade, small,
     medium, large, breadSticks, breadSticksBites, cookie;
-    JButton finishButton, backButton, addToOrderButton;
+    JButton finishButton, backButton;
     Font font1, font2, titleFont, buttonFont, checkBoxFont;
 
     public ExtrasMenu(){
@@ -22,12 +23,12 @@ public class ExtrasMenu extends Page implements ActionListener {
         checkBoxFont = new Font("Impact", Font.PLAIN, 24);
 
         rightPanel = new JPanel(new GridLayout(2, 1)); // Use a 1x3 grid layout
-        rightPanel.setBounds(8*w5p, 7*h5p, 900, 400);
+        rightPanel.setBounds(8*w5p, 7*h5p, 50*w1p, 45*h1p);
 
         //sub panels
         drinkChoices = new JPanel(new GridLayout(1,2));
         drinkChoices.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10)); // Add some space
-        drinkChoices.setPreferredSize(new Dimension(100, 150));
+        drinkChoices.setPreferredSize(new Dimension(10*w1p, 20*h1p));
         drinkChoices.setBackground(Color.decode("#cccccc"));
         //create sub panels for first drink column and second drink column
         pepsi_oragange = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -37,43 +38,53 @@ public class ExtrasMenu extends Page implements ActionListener {
         rtBeer_lemonade.setBackground(Color.decode("#cccccc"));
         rtBeer_lemonade.setLayout(new BoxLayout(rtBeer_lemonade, BoxLayout.Y_AXIS)); // Vertical layout
 
-        drinkSizes = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        drinkSizes.setLayout(new BoxLayout(drinkSizes, BoxLayout.Y_AXIS)); // Vertical layout
+        drinkSizes = new JPanel(new FlowLayout(FlowLayout.LEFT));
         drinkSizes.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
         drinkSizes.setBackground(Color.decode("#cccccc"));
 
         drinksLabel = new JLabel("Drinks:");
         drinksLabel.setFont(font1);
-        drinksLabel.setBounds((8*w5p)+20, 5*h5p, 300, 100);
+        drinksLabel.setBounds(41*w1p, 5*h5p, 30*w1p, 10*h1p);
 
         // create check boxes for drink menu
         pepsi = new JCheckBox("Pepsi");
         pepsi.setFont(checkBoxFont);
+        pepsi.addActionListener(this);
         dietPepsi = new JCheckBox("Diet Pepsi");
         dietPepsi.setFont(checkBoxFont);
+        dietPepsi.addActionListener(this);
         orange = new JCheckBox("Orange");
         orange.setFont(checkBoxFont);
+        orange.addActionListener(this);
         dietOrange = new JCheckBox("Diet Orange");
         dietOrange.setFont(checkBoxFont);
+        dietOrange.addActionListener(this);
         rootBeer = new JCheckBox("Root Beer");
         rootBeer.setFont(checkBoxFont);
+        rootBeer.addActionListener(this);
         dietRB = new JCheckBox("Diet Root Beer");
         dietRB.setFont(checkBoxFont);
+        dietRB.addActionListener(this);
         sierraMist = new JCheckBox("Sierra Mist");
         sierraMist.setFont(checkBoxFont);
+        sierraMist.addActionListener(this);
         lemonade = new JCheckBox("Lemonade");
         lemonade.setFont(checkBoxFont);
+        lemonade.addActionListener(this);
 
-        drinkSizeLabel = new JLabel("Size:");
+        drinkSizeLabel = new JLabel("Size:  ");
         drinkSizeLabel.setFont(font1);
         drinkSizes.add(drinkSizeLabel);
 
-        small = new JCheckBox("Small");
+        small = new JCheckBox("Small  ");
         small.setFont(checkBoxFont);
-        medium = new JCheckBox("Medium");
+        small.addActionListener(this);
+        medium = new JCheckBox("Medium  ");
         medium.setFont(checkBoxFont);
-        large = new JCheckBox("Large");
+        medium.addActionListener(this);
+        large = new JCheckBox("Large  ");
         large.setFont(checkBoxFont);
+        large.addActionListener(this);
         
         // add drink choice check boxes to panel
         pepsi_oragange.add(pepsi);
@@ -99,7 +110,7 @@ public class ExtrasMenu extends Page implements ActionListener {
         // create left panel to hold sides
         leftPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS)); // Vertical layout
-        leftPanel.setBounds(2*w5p, 6*h5p, 350, 400);
+        leftPanel.setBounds(2*w5p, 6*h5p, 30*w1p, 50*h1p);
 
         // create lable for sides and add to panel
         sidesLabel = new JLabel("Sides:");
@@ -121,26 +132,26 @@ public class ExtrasMenu extends Page implements ActionListener {
 
         //create finish button and set layout
         finishButton = new JButton("Finish");
-        finishButton.setBounds((17*w5p)+10,h5p,150,50);
+        finishButton.setBounds(87*w1p,h5p,10*w1p, 7*h1p);
         finishButton.setBackground(Color.decode("#e06666"));
         finishButton.setFont(buttonFont);
         finishButton.addActionListener(this);
         //create back button and set layout
         backButton = new JButton("Back");
-        backButton.setBounds(w5p, h5p, 150,50);
+        backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
         backButton.setBackground(Color.decode("#e06666"));
         backButton.setFont(buttonFont);
         backButton.addActionListener(this);
-        //create addToOrderButton and set layout
-        addToOrderButton = new JButton("Add to Order");
-        addToOrderButton.setBounds((17*w5p)+10,17*h5p,150,50);
-        addToOrderButton.setBackground(Color.decode("#e06666"));
-        addToOrderButton.setFont(buttonFont);
 
         // create title
         title = new JLabel("Extras");
         title.setFont(titleFont);
-        title.setBounds((9*w5p), h5p, 500, 60);
+        title.setBounds((9*w5p), h5p, 30*w1p, 7*h1p);
+
+        // create pricing JLabel
+        pricing = new JLabel("Pricing: all drinks are $1 for any size");
+        pricing.setFont(new Font("Impact", Font.PLAIN, 24));
+        pricing.setBounds(52*w1p, 29*h1p, 40*w1p, 7*h1p);
 
         // set background for all elements
         pepsi.setBackground(Color.decode("#cccccc"));
@@ -165,10 +176,10 @@ public class ExtrasMenu extends Page implements ActionListener {
         this.add(title);
         this.add(backButton);
         this.add(finishButton);
-        this.add(addToOrderButton);
         this.add(rightPanel);
         this.add(leftPanel);
         this.add(drinksLabel);
+        this.add(pricing);
         this.setVisible(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -185,15 +196,153 @@ public class ExtrasMenu extends Page implements ActionListener {
     //back button
     @Override
     public void actionPerformed(ActionEvent e){
-        //back button
-        if(e.getActionCommand().equals("Back")){
-            new PizzaMenu().showPizzaMenu(true);
-            this.dispose();
+        if(e.getSource().equals(finishButton)){
+             // set the drink size
+            String size = "";
+            if (small.isSelected()) {
+                size = "Small";
+            } else if (medium.isSelected()) {
+                size = "Medium";
+            } else if (large.isSelected()) {
+                size = "Large";
+            }
+
+            // get the sides
+            ArrayList<String> sides = new ArrayList<String>();
+            if(breadSticks.isSelected()){
+                sides.add("Breadsticks");
+            } if(breadSticksBites.isSelected()){
+                sides.add("Breadsticks Bites");
+            } if(cookie.isSelected()){
+                sides.add("Big Chocolate Chip Cookie");
+            }
+
+            //get the sides
+            String drinkChoice = "";
+            if(pepsi.isSelected()){
+                drinkChoice  = "Pepsi";
+            }else if(dietPepsi.isSelected()){
+                drinkChoice  = "Diet Pepsi";
+            }else if(orange.isSelected()){
+                drinkChoice  = "Orange";
+            }else if(dietOrange.isSelected()){
+                drinkChoice  = "Diet Orange";
+            }else if(rootBeer.isSelected()){
+                drinkChoice  = "Root Beer";
+            }else if(dietRB.isSelected()){
+                drinkChoice  = "Diet Root Beer";
+            }else if(sierraMist.isSelected()){
+                drinkChoice  = "Sierra Mist";
+            }else if(lemonade.isSelected()){
+                drinkChoice  = "Lemonade";
+            }
+
+            if(validateSelection()){
+                JOptionPane.showMessageDialog(null, "Must select both drink and size","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
+            }else{
+
+                if(size.length() > 0 && drinkChoice.length() > 0){
+                    Drink drinks = new Drink(size, drinkChoice);
+                    currentOrder.addToOrder(drinks);
+                }
+                if(sides.size() > 0){
+                    Sides sideObj = new Sides(sides);
+                    currentOrder.addToOrder(sideObj);
+                }              
+                new OrderSummary().showOrderSummary(true);
+                this.dispose();
+            }
+        //Checkboxes
+        }else if(e.getActionCommand().equals("Small  ")){
+            if (small.isSelected()) {
+                      medium.setSelected(false);
+                      large.setSelected(false);
+              }
+        }else if(e.getActionCommand().equals("Medium  ")){
+              if (medium.isSelected()) {
+                  small.setSelected(false);
+                  large.setSelected(false);
+              }
+        }else if(e.getActionCommand().equals("Large  ")){
+              if (large.isSelected()) {
+                  small.setSelected(false);
+                  medium.setSelected(false);
+               }
+    
+        }else if(e.getActionCommand().equals("Pepsi")){
+            selectDrink("Pepsi");
+        }else if(e.getActionCommand().equals("Diet Pepsi")){
+            selectDrink("Diet Pepsi");
+        }else if(e.getActionCommand().equals("Orange")){
+            selectDrink("Orange");
+        }else if(e.getActionCommand().equals("Diet Orange")){
+            selectDrink("Diet Orange");
+        }else if(e.getActionCommand().equals("Root Beer")){
+            selectDrink("Root Beer");
+        }else if(e.getActionCommand().equals("Diet Root Beer")){
+            selectDrink("Diet Root Beer");
+        }else if(e.getActionCommand().equals("Sierra Mist")){
+            selectDrink("Sierra Mist");
+        }else if(e.getActionCommand().equals("Lemonade")){
+            selectDrink("Lemonade");
         }
-        //finish button
-        if(e.getActionCommand().equals("Finish")){
-            new OrderSummary().showOrdrSmry(true);
-            this.dispose();
+    }
+
+    public void selectDrink(String s){
+        // p, dp, o, do, rb, drb, sm, l
+        boolean[] selected = {false, false, false, false, false, false, false, false};
+        switch (s.toLowerCase()){
+            case "pepsi":
+                selected[0] = true;
+                break;
+            case "diet pepsi":
+                selected[1] = true;
+                break;
+            case "orange":
+                selected[2] = true;
+                break;
+            case "diet orange":
+                selected[3] = true;
+                break;
+            case "root beer":
+                selected[4] = true;
+                break;
+            case "diet root beer":
+                selected[5] = true;
+                break;
+            case "sierra mist":
+                selected[6] = true;
+                break;
+            case "lemonade":
+                selected[7] = true;
+                break;
         }
+        pepsi.setSelected(selected[0]);
+        dietPepsi.setSelected(selected[1]);
+        orange.setSelected(selected[2]);
+        dietOrange.setSelected(selected[3]);
+        rootBeer.setSelected(selected[4]);
+        dietRB.setSelected(selected[5]);
+        sierraMist.setSelected(selected[6]);
+        lemonade.setSelected(selected[7]);
+
+    }
+
+    public boolean validateSelection(){
+         
+         if(!(small.isSelected()) && !(medium.isSelected()) && !(large.isSelected())){
+            if(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected()){
+                return true;
+            }
+         }
+         if(!(pepsi.isSelected() || dietPepsi.isSelected() || orange.isSelected() || dietOrange.isSelected() || rootBeer.isSelected() || dietRB.isSelected() || sierraMist.isSelected() || lemonade.isSelected())){
+            if(small.isSelected() || medium.isSelected() || large.isSelected()){
+                return true;
+            }
+         }
+         if(breadSticks.isSelected() || breadSticksBites.isSelected() || cookie.isSelected()){
+            return false;
+         }
+         return false;
     }
 }

@@ -7,9 +7,10 @@ public class Order {
     Sides sides;
     double orderCost;
     String paymentMethod;
-    boolean isDelivery;
+    String dilveryMethod;
     String signature;
     double tip;
+    String phoneNumber;
 
 
     public Order(){
@@ -55,7 +56,11 @@ public class Order {
 
     // setters for isDelivery and payment method
     public void setDeliveryMethod(boolean isDelivery){
-        this.isDelivery = isDelivery;
+        if(isDelivery){
+            dilveryMethod = "Carry Out";
+        }else{
+            dilveryMethod = "Pick Up";
+        }
     }
 
     public void setPaymentMethod(String s){
@@ -107,6 +112,14 @@ public class Order {
         double c = calcCost();
         String cost = "$" + String.format("%.2f", c);
         return cost;
+    }
+
+    public void setPhoneNumber(String s){
+        phoneNumber = s;
+    }
+
+    public String getPhoneNumber(){
+        return phoneNumber;
     }
 
 }

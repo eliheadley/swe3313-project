@@ -41,23 +41,23 @@ public class CreditInfo extends Page implements ActionListener {
 
         //Create labels
         title = new JLabel("Secure Credit Card Payment");
-        title.setBounds(41*w1p, 10*h1p, 400, 50);
+        title.setBounds(41*w1p, 10*h1p, 20*w1p, 20*h1p);
         title.setFont(titleFont);
 
         cardLabel = new JLabel("Credit Card Number");
-        cardLabel.setBounds(33*w1p,31*h1p,250,50);
+        cardLabel.setBounds(33*w1p,31*h1p,10*w1p, 5*h1p);
         cardLabel.setFont(font);
 
         nameLabel = new JLabel("Name on Card");
-        nameLabel.setBounds(52*w1p,31*h1p,250,50);
+        nameLabel.setBounds(52*w1p,31*h1p,10*w1p, 5*h1p);
         nameLabel.setFont(font);
 
         expLabel = new JLabel("Expiration Date");
-        expLabel.setBounds(33*w1p,46*h1p,250,50);
+        expLabel.setBounds(33*w1p,46*h1p,10*w1p, 5*h1p);
         expLabel.setFont(font);
 
         cvvLabel = new JLabel("Security Code");
-        cvvLabel.setBounds(52*w1p, 46*h1p,250,50);
+        cvvLabel.setBounds(52*w1p, 46*h1p,10*w1p, 5*h1p);
         cvvLabel.setFont(font);
 
         //Create payNow button
@@ -70,11 +70,11 @@ public class CreditInfo extends Page implements ActionListener {
         this.getContentPane().setLayout(null);
 
         creditInfoPanel1 = new JPanel(new GridLayout(1,1, 75, 0));
-        creditInfoPanel1.setBounds(33*w1p, 35*h1p, 650, 50);
+        creditInfoPanel1.setBounds(33*w1p, 35*h1p, 34*w1p, 5*h1p);
         creditInfoPanel1.setBackground(Color.decode("#cccccc"));
 
         creditInfoPanel2 = new JPanel(new GridLayout(1,1, 75, 0));
-        creditInfoPanel2.setBounds(33*w1p, 50*h1p, 650, 50);
+        creditInfoPanel2.setBounds(33*w1p, 50*h1p, 34*w1p, 5*h1p);
         creditInfoPanel2.setBackground(Color.decode("#cccccc"));
 
         creditInfoPanel1.add(cardTxtIn);

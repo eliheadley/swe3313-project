@@ -7,7 +7,7 @@ public class Database{
     private static final String URL = "jdbc:hsqldb:file:database/PizzaShop";
     private Connection conn = null;
     private String sql = "";
-    private PreparedStatement pstmt = null;
+    public PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
     public String[] getUser(String phoneNumber){

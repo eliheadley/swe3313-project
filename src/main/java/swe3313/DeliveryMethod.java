@@ -26,6 +26,11 @@ public class DeliveryMethod extends Page implements ActionListener{
         title.setBounds((6*w5p), h5p, 700, 60);
         title.setFont(titleFont);
 
+        /*  !!! Create logo using a icon
+        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
+        img.setBounds((7*w5p), 3*h5p, 438, 438);
+        this.add(img); */
+
          //back button
          backButton = new JButton("Back");
          backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
@@ -125,12 +130,12 @@ public class DeliveryMethod extends Page implements ActionListener{
          if(e.getActionCommand().equals("Back")){
             new PaymentMethod().showPaymentMethod(true);
             this.dispose();
-        }else if(e.getSource().equals(carryOut)){
+        }else if(e.getActionCommand().equals("                                                                                                                      Carry Out")){
             if(carryOut.isSelected()){
                 pickup.setSelected(false);
             }
         }
-        else if(e.getSource().equals(pickup)){
+        else if(e.getActionCommand().equals("                                                                                                                     Pickup")){
             if(pickup.isSelected()){
                 carryOut.setSelected(false);
             }
@@ -140,17 +145,13 @@ public class DeliveryMethod extends Page implements ActionListener{
                 JOptionPane.showMessageDialog(this, "Please Select a Delivery Method", "Oops!", JOptionPane.ERROR_MESSAGE);
             }else {
                 if(carryOut.isSelected()){
-                    currentOrder.setDeliveryMethod(true);
-                }else{
-                    currentOrder.setDeliveryMethod(false);
+                    currentOrder.deliveryMethod = "Carry Out";
+
+                }else if (pickup.isSelected()){
+                    currentOrder.deliveryMethod = "Pickup";
                 }
-                if(currentOrder.paymentMethod.equalsIgnoreCase("credit")){
-                    new CreditInfo().showCreditInfo(true);
-                    this.dispose();
-                }else{
-                    new Receipt().showReceipt(true);
-                }
-                
+                new CreditInfo().showCreditInfo(true);
+                this.dispose();
             }
         }
      }

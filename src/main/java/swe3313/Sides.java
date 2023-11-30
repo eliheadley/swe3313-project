@@ -10,7 +10,9 @@ public class Sides {
         sidesOptions = sO;
         sideQty++;
     }
-     // getter for sides
+     public Sides(boolean add) {
+    }
+    // getter for sides
     public String getSides(){
         String s = "";
         for(String x : sidesOptions){

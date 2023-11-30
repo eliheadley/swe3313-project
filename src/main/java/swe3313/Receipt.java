@@ -11,8 +11,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public class Receipt extends Page implements ActionListener{
-    String myTip;
-    JLabel img, title, address, otherInfo, label1, label2, label3, name, number, userAddress, dMethod, etod, line1, line2, line3, tip, total, signature, date;
+    Double myTip;
+    JLabel img, title, mainInfo, address, otherInfo, label1, label2, label3, name, number, userAddress, dMethod, etod, username, phoneNumber, userDMethod, userEtod, line1, line2, line3, tip, total, signature, date;
     JPanel infoPanel, userInfoPanel, myUserInfoPanel, orderPanel;
     Font subTitleFont, textFont, titleFont, infoFont;
     JTextArea pizzaItem, drinkItem, sidesItem, pizzaQty, pizzaPrice, pizzaTotal, sideQty, sidePrice, sideTotal,
@@ -22,10 +22,8 @@ public class Receipt extends Page implements ActionListener{
     Drink drinks;
     Sides sides;
     Pizza pizza;
-
     String[] user;
     Database db;
-    
 
     public Receipt(){
         subTitleFont = new Font("Impact", Font.PLAIN, 24);
@@ -35,49 +33,43 @@ public class Receipt extends Page implements ActionListener{
 
         // create title
         title = new JLabel("Mom and Pop's Pizza Shop Receipt");
-        title.setBounds(30*w1p, 5*h1p, 800, 50);
+        title.setBounds(30*w1p, 5*h1p, 50*w1p, 8*h1p);
         title.setFont(titleFont);
 
-        /*  !!! Create logo using a icon
-        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
-        img.setBounds((7*w5p), 3*h5p, 438, 438);
-        this.add(img); */
-
         // make labels for restuaurant info
-        address = new JLabel("680 Arntson Rd, Suite 161 Marietta, GA 30060");
-        address.setFont(infoFont);
+        mainInfo = new JLabel("680 Arntson Rd, Suite 161 Marietta, GA 30060");
+        mainInfo.setFont(infoFont);
         otherInfo = new JLabel("MomAndPopPizzeria.com  |  770 555-1212");
         otherInfo.setFont(infoFont);
 
         // make Address Info panel
         infoPanel = new JPanel();
-        infoPanel.setBounds(42*w1p, 11*h1p, 300, 55);
+        infoPanel.setBounds(40*w1p, 12*h1p, 20*w1p, 7*h1p);
         infoPanel.setBackground(Color.decode("#cccccc"));
-        infoPanel.add(address);
+        infoPanel.add(mainInfo);
         infoPanel.add(otherInfo);
 
         //Make first separator line
         line1 = new JLabel();
-        line1.setBounds(10*w1p, 23*h1p, 1500, 2);
+        line1.setBounds(10*w1p, 23*h1p, 79*w1p, 3);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 10);
         line1.setBorder(border);
         
         // make customer info label
         label1 = new JLabel("Customer Info");
         label1.setFont(subTitleFont);
-        label1.setBounds(2*w5p, 3*h5p, 150, 30);
+        label1.setBounds(10*w1p, 15*h1p, 10*w1p, 3*w1p);
 
         //make user info panel
-        userInfoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 225, 35));
-        userInfoPanel.setBounds(5*w1p, 17*h1p, 1700, 60);
-        userInfoPanel.setBackground(Color.decode("#cccccc"));
-        //make labels for user info
+        userInfoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 225, 0));
+        userInfoPanel.setBounds(4*w1p, 20*h1p, 90*w1p, 3*h1p);
+        userInfoPanel.setBackground(Color.decode("#cccccc")); 
         name = new JLabel("Name");
         name.setFont(textFont);
         number = new JLabel("Phone Number");
         number.setFont(textFont);
-        userAddress = new JLabel("Address");
-        userAddress.setFont(textFont);
+        address = new JLabel("Address");
+        address.setFont(textFont);
         dMethod = new JLabel("Delivery Method");
         dMethod.setFont(textFont);
         etod = new JLabel("Estimated Time of Delivery");
@@ -85,60 +77,61 @@ public class Receipt extends Page implements ActionListener{
         //add labels to panel
         userInfoPanel.add(name);
         userInfoPanel.add(number);
-        userInfoPanel.add(userAddress);
+        userInfoPanel.add(address);
         userInfoPanel.add(dMethod);
         userInfoPanel.add(etod);
 
-
-
         //make myUser info panel
-        myUserInfoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 225, 35));
-        myUserInfoPanel.setBounds(5*w1p, 20*h1p, 1700, 60);
+        myUserInfoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 275, 0));
+        myUserInfoPanel.setBounds(w1p, 25*h1p, 90*w1p, 3*h1p);
         myUserInfoPanel.setBackground(Color.decode("#cccccc"));
         //make labels for myUser info 
         try{
-            user = new Database().getUser(currentOrder.getPhoneNumber());
-        }catch(Exception e){
-            
+            user = new Database().getUser("6789534496"/*currentOrder.getPhoneNumber()*/);
+            username = new JLabel("Test");
+            phoneNumber = new JLabel("Test");
+            userAddress = new JLabel("Test");
+
+        }catch(NullPointerException npe){
+            username = new JLabel("");
+            phoneNumber = new JLabel("");
+            userAddress = new JLabel("");
         }
-        name = new JLabel(user[2]);
-        name.setFont(textFont);
-    
-        number = new JLabel(user[0]);
-        number.setFont(textFont);
-        userAddress = new JLabel(user[5]);
+        userDMethod = new JLabel(currentOrder.deliveryMethod);
+        userEtod = new JLabel("30 Minutes");
+        //set font for myUser labels
+        username.setFont(textFont);
+        phoneNumber.setFont(textFont);
         userAddress.setFont(textFont);
-        dMethod = new JLabel(currentOrder.dilveryMethod);
-        dMethod.setFont(textFont);
-        etod = new JLabel("30 Minutes");
-        etod .setFont(textFont);
+        userDMethod.setFont(textFont);
+        userEtod.setFont(textFont);
         //add labels to panel
-        myUserInfoPanel.add(name);
-        myUserInfoPanel.add(number);
+        myUserInfoPanel.add(username);
+        myUserInfoPanel.add(phoneNumber);
         myUserInfoPanel.add(userAddress);
-        myUserInfoPanel.add(dMethod);
-        myUserInfoPanel.add(etod);
+        myUserInfoPanel.add(userDMethod);
+        myUserInfoPanel.add(userEtod);
 
         // make Order item label
         label2 = new JLabel("Order Item(s)");
         label2.setFont(subTitleFont);
-        label2.setBounds(2*w5p, 6*h5p, 150, 30);
+        label2.setBounds(2*w1p, 6*h1p, w1p, h1p);
 
         //make quantity info label
         label3 = new JLabel("Qty                        Each                       Total");
         label3.setFont(subTitleFont);
-        label3.setBounds(14*w5p, 6*h5p, 400, 30);
+        label3.setBounds(14*w1p, 6*h1p, w1p, h1p);
         
         //Make second separator line
         line2 = new JLabel();
-        line2.setBounds(10*w1p, 36*h1p, 1500, 2);
+        line2.setBounds(10*w1p, 36*h1p, 79*w1p, 3);
         line2.setBorder(border);
 
         // make text areas to display order items on the screen
         //pizza text area
         pizzaItem = new JTextArea();
         pizzaItem.setLineWrap(true);
-        pizzaItem.setBounds(10*w1p, 40*h1p, 15*w1p, 7*h1p);
+        pizzaItem.setBounds(10*w1p, 40*h1p, 40*w1p, 7*h1p);
         pizzaItem.setFont(textFont);
         pizzaItem.setBackground(Color.decode("#cccccc"));
             //make smaller text areas to hold numbers
@@ -228,22 +221,22 @@ public class Receipt extends Page implements ActionListener{
         //make order total label
         total = new JLabel("Current Total: $" + currentOrder.calcCost());
         total.setFont(subTitleFont);
-        total.setBounds(77*w1p, 80*h1p, 300, 30);
+        total.setBounds(76*w1p, 81*h1p, 30*w1p, 3*h1p);
 
         //make signature label
         signature = new JLabel("Signature");
         signature.setFont(subTitleFont);
-        signature.setBounds(10*w1p, 85*h1p, 150, 30);
+        signature.setBounds(10*w1p, 85*h1p, 7*w1p, 3*h1p);
 
         //make singature text field
         sigTxt = new JTextField();
         sigTxt.setFont(textFont);
-        sigTxt.setBounds(16*w1p, 84*h1p, 57*w1p, 4*h1p);
+        sigTxt.setBounds(16*w1p, 84*h1p, 58*w1p, 4*h1p);
         sigTxt.setBackground(Color.decode("#cccccc"));
 
         //Make signature line
         line3 = new JLabel();
-        line3.setBounds(16*w1p, 88*h1p, 1100, 2);
+        line3.setBounds(16*w1p, 88*h1p, 58*w1p, 2);
         line3.setBorder(border);
 
         //make date and time label
@@ -251,12 +244,14 @@ public class Receipt extends Page implements ActionListener{
         LocalDateTime now = LocalDateTime.now();
         date = new JLabel("Date: " + dtf.format(now));
         date.setFont(subTitleFont);
-        date.setBounds(15*w5p, 85*h1p, 350, 30);
+        date.setBounds(75*w1p, 85*h1p, 30*w1p, 3*h1p);
 
+        
         // make pizza object to be displayed on the screen
         try{           
+            pizza = currentOrder.getPizzas();
             String pizzaDesc = "";
-            pizzaDesc += pizza;
+            pizzaDesc += pizza.toString();
             pizzaItem.setText(pizzaDesc);
             pizzaQty.setText(pizza.getQty());
             pizzaPrice.setText(pizza.getCost());
@@ -265,7 +260,7 @@ public class Receipt extends Page implements ActionListener{
         }catch(NullPointerException npe){
             pizzaItem.setText("");
         }
-
+        
          // make extras object to be displayed on the screen
          try{
             sides = currentOrder.getSides();
@@ -296,6 +291,7 @@ public class Receipt extends Page implements ActionListener{
         this.add(label1);
         this.add(line1);
         this.add(userInfoPanel);
+        this.add(myUserInfoPanel);
         this.add(label2);
         this.add(label3);
         this.add(line2);
@@ -328,15 +324,15 @@ public class Receipt extends Page implements ActionListener{
     @Override
      public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Print Receipt")){
-            myTip = tipTxt.getText();
-            if(Double.parseDouble(myTip) < 0)
+            myTip = Double.parseDouble(tipTxt.getText());
+            if(myTip < 0)
             {
                 JOptionPane.showMessageDialog(this, "Please Enter a Valid Tip", "Tip Error", JOptionPane.ERROR_MESSAGE);
             }else if(sigTxt.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please Sign", "Signature Error", JOptionPane.ERROR_MESSAGE);
             }else{
                 currentOrder.setSignature(sigTxt.getText());
-                currentOrder.setTip(Integer.parseInt(myTip));
+                currentOrder.setTip(myTip);
                 new PrintedReceipt().showPrintedReceipt(true);
                 this.dispose();
             }

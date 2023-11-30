@@ -5,10 +5,9 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.Calendar;
 
 public class CreditInfo extends Page implements ActionListener {
-    String cardNumber, name, exp, cvv;
+    String cardNumber, name, exp, cvv, month, year;
     //Create textfields
     JTextField cardTxtIn, nameTxtIn, expTxtIn, cvvTxtIn;
     JPanel creditInfoPanel1, creditInfoPanel2;
@@ -122,45 +121,35 @@ public class CreditInfo extends Page implements ActionListener {
             name = nameTxtIn.getText();
             name = name.replaceAll("\\s", "");
             exp = expTxtIn.getText();
-            
-            int month = Integer.parseInt(exp.substring(exp.indexOf("/")-2,exp.indexOf("/")));
-            int year = Integer.parseInt(exp.substring(exp.indexOf("/"), exp.indexOf("/")+2));
-            Calendar today = Calendar.getInstance();
-            int todaysMonth = today.MONTH;
+            exp = exp.replaceAll("\\s", "/");
             cvv = cvvTxtIn.getText();
-
-            //null errors
+            
+            //credit card errors
             if(cardTxtIn.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Credit Card Number cannot be empty.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
             }else if(!isNumeric(cardNumber)){
                 JOptionPane.showMessageDialog(this, "Credit Card Number must consist of only numbers.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
+            }else if(cardNumber.length() != 16){ 
+                JOptionPane.showMessageDialog(this, "Credit Card Number must be 16 digits.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
+            //name errors
             }else if(nameTxtIn.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Name on Card cannot be empty.", "Name on Card Error", JOptionPane.ERROR_MESSAGE);
-            } else if(expTxtIn.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Expiration Date cannot be empty", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
-            } else if(cvvTxtIn.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Security Code cannot be empty", "Securit Code Error", JOptionPane.ERROR_MESSAGE);
-            }  //card length error
-            else if(cardNumber.length() != 16){ 
-                JOptionPane.showMessageDialog(this, "Credit Card Number must be 16 digits.", "Credit Card Number Error", JOptionPane.ERROR_MESSAGE);
-            } //invalid name error
-            else if(!((name != null) && (!name.equals("")) && (name.matches("^[a-zA-Z]*$")))){ 
+            }else if(!((name != null) && (!name.equals("")) && (name.matches("^[a-zA-Z]*$")))){ 
                 JOptionPane.showMessageDialog(this, "Name on Card must only be characters A-Z.", "Name on Card Error", JOptionPane.ERROR_MESSAGE);
-            } // invalid exp date error
-            else if(month < 1 || month > 12){ 
-                JOptionPane.showMessageDialog(this, "Expiration Date must be a valid date", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
-             // invalid cvv error
-            }else if(month < todaysMonth && year < 2023){ 
-                JOptionPane.showMessageDialog(this, "Card is Expired.", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
-             // invalid cvv error
-            }else if(cvv == null){ 
-                JOptionPane.showMessageDialog(this, "Security Code must be a valid CVV", "Securit Code Error", JOptionPane.ERROR_MESSAGE);
-            } // go to receipt
-            else{ 
-                new PaymentMethod().showPaymentMethod(true);
+            //exp date errors
+            }else if(expTxtIn.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Expiration Date cannot be empty", "Expiration Date Error", JOptionPane.ERROR_MESSAGE);
+            // cvv errors
+            }else if(cvvTxtIn.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Security Code cannot be empty", "Security Code Error", JOptionPane.ERROR_MESSAGE);
+            }else if(!isNumeric(cvv)){ 
+                JOptionPane.showMessageDialog(this, "Security Code must be a valid CVV", "Security Code Error", JOptionPane.ERROR_MESSAGE);
+            }else if(cvv.length() != 3){ 
+                JOptionPane.showMessageDialog(this, "Security Code must be a valid CVV", "Security Code Error", JOptionPane.ERROR_MESSAGE);
+            }else{
+                new Receipt().showReceipt(true);
                 this.dispose();
-            } 
-        
+            }
         } 
     }
     

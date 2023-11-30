@@ -7,7 +7,7 @@ public class Order {
     Sides sides;
     double orderCost;
     String paymentMethod;
-    String dilveryMethod;
+    String deliveryMethod;
     String signature;
     double tip;
     String phoneNumber;
@@ -57,9 +57,9 @@ public class Order {
     // setters for isDelivery and payment method
     public void setDeliveryMethod(boolean isDelivery){
         if(isDelivery){
-            dilveryMethod = "Carry Out";
+            deliveryMethod = "Carry Out";
         }else{
-            dilveryMethod = "Pick Up";
+            deliveryMethod = "Pick Up";
         }
     }
 

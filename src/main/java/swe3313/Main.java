@@ -5,8 +5,8 @@ class Main{
        //new MainPage().showMain(true);
        //new Receipt().showReceipt(true);
        //new OrderSummary().showOrderSummary(true);
-       ///new CreditInfo().showCreditInfo(true);
-       new PizzaMenu().showPizzaMenu(true);
+       new CreditInfo().showCreditInfo(true);
+       //new PizzaMenu().showPizzaMenu(true);
     }
 }
 

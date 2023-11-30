@@ -31,7 +31,7 @@ public class PrintedReceipt extends Page implements ActionListener{
 
         // create title
         title = new JLabel("Mom and Pop's Pizza Shop Receipt");
-        title.setBounds(30*w1p, 5*h1p, 50*w1p, 8*h1p);
+        title.setBounds(30*w1p, 5*h1p, 60*w1p, 8*h1p);
         title.setFont(titleFont);
 
         // make labels for restuaurant info

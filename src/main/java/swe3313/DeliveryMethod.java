@@ -150,8 +150,14 @@ public class DeliveryMethod extends Page implements ActionListener{
                 }else if (pickup.isSelected()){
                     currentOrder.deliveryMethod = "Pickup";
                 }
-                new CreditInfo().showCreditInfo(true);
-                this.dispose();
+                if(currentOrder.paymentMethod.equalsIgnoreCase("credit")){
+                    new CreditInfo().showCreditInfo(true);
+                    this.dispose();
+                }else{
+                    new Receipt().showReceipt(true);
+                    this.dispose();
+                }
+                
             }
         }
      }

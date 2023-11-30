@@ -87,10 +87,13 @@ public class Receipt extends Page implements ActionListener{
         myUserInfoPanel.setBackground(Color.decode("#cccccc"));
         //make labels for myUser info 
         try{
-            user = new Database().getUser("6789534496"/*currentOrder.getPhoneNumber()*/);
-            username = new JLabel("Test");
-            phoneNumber = new JLabel("Test");
-            userAddress = new JLabel("Test");
+            user = new Database().getUser(currentOrder.getPhoneNumber());
+            String name = "";
+            name += user[2];
+            name += user[3];
+            username = new JLabel(name);
+            phoneNumber = new JLabel(user[0]);
+            userAddress = new JLabel(user[5]);
 
         }catch(NullPointerException npe){
             username = new JLabel("");
@@ -204,16 +207,16 @@ public class Receipt extends Page implements ActionListener{
         //make tip label
         tip = new JLabel("Tip: $");
         tip.setFont(subTitleFont);
-        tip.setBounds(81*w1p, 76*h1p, 9*w1p, 4*h1p);
+        tip.setBounds(76*w1p, 76*h1p, 9*w1p, 4*h1p);
 
         //make tip text field
         tipTxt = new JTextField();
         tipTxt.setFont(textFont);
-        tipTxt.setBounds(84*w1p, 76*h1p, 9*w1p, 4*h1p);
+        tipTxt.setBounds(80*w1p, 76*h1p, 9*w1p, 4*h1p);
 
         //add print receipt button
         tipButton = new JButton("Print Receipt");
-        tipButton.setBounds(77*w1p, 90*h1p, 9*w1p, 4*h1p);//x axis, y axis, width, height
+        tipButton.setBounds(77*w1p, 90*h1p, 12*w1p, 6*h1p);//x axis, y axis, width, height
         tipButton.setBackground(Color.decode("#e06666"));
         tipButton.setFont(new Font("Impact", Font.PLAIN, 20)); 
         tipButton.addActionListener(this);
@@ -226,7 +229,7 @@ public class Receipt extends Page implements ActionListener{
         //make signature label
         signature = new JLabel("Signature");
         signature.setFont(subTitleFont);
-        signature.setBounds(10*w1p, 85*h1p, 7*w1p, 3*h1p);
+        signature.setBounds(8*w1p, 85*h1p, 7*w1p, 3*h1p);
 
         //make singature text field
         sigTxt = new JTextField();
@@ -244,7 +247,7 @@ public class Receipt extends Page implements ActionListener{
         LocalDateTime now = LocalDateTime.now();
         date = new JLabel("Date: " + dtf.format(now));
         date.setFont(subTitleFont);
-        date.setBounds(75*w1p, 85*h1p, 30*w1p, 3*h1p);
+        date.setBounds(76*w1p, 85*h1p, 30*w1p, 3*h1p);
 
         
         // make pizza object to be displayed on the screen

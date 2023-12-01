@@ -29,6 +29,18 @@
             <source>${project.basedir}/src/main/resources/MomAndPizza.png</source>
             <destName>MomAndPizza.png</destName>
         </file>
+        <file>
+            <source>${project.basedir}/src/main/resources/Lock.png</source>
+            <destName>Lock.png</destName>
+        </file>
+        <file>
+            <source>${project.basedir}/src/main/resources/MasterCard.png</source>
+            <destName>MasterCard.png</destName>
+        </file>
+        <file>
+            <source>${project.basedir}/src/main/resources/Visa.png</source>
+            <destName>Visa.png</destName>
+        </file>
     </files>
     <dependencySets>
         <dependencySet>

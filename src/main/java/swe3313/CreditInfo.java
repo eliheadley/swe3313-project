@@ -1,6 +1,9 @@
 package swe3313;
 
 import java.awt.event.*;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,7 +14,7 @@ public class CreditInfo extends Page implements ActionListener {
     //Create textfields
     JTextField cardTxtIn, nameTxtIn, expTxtIn, cvvTxtIn;
     JPanel creditInfoPanel1, creditInfoPanel2;
-    JLabel title, cardLabel, nameLabel, expLabel, cvvLabel;
+    JLabel title, cardLabel, nameLabel, expLabel, cvvLabel, img1, img2, img3;
     Font font, textFont, titleFont, buttonFont;
     //Create buttons
     JButton payNow;
@@ -21,10 +24,39 @@ public class CreditInfo extends Page implements ActionListener {
         titleFont = new Font("Impact", Font.PLAIN, 28);
         buttonFont = new Font("Impact", Font.PLAIN, 20);
 
-        /*  !!! Create logo using a icon
-        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
-        img.setBounds((7*w1p), 3*h1p, 438, 438);
-        this.add(img); */
+        
+        try {
+            InputStream stream1 = getClass().getResourceAsStream("/Lock.png");
+            img1  = new JLabel(new ImageIcon(ImageIO.read(stream1)));
+            img1.setBounds(9*w5p, 1*h1p, 150, 150);
+            this.add(img1);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        try {
+            InputStream stream2 = getClass().getResourceAsStream("/MasterCard.png");
+            img2  = new JLabel(new ImageIcon(ImageIO.read(stream2)));
+            img2.setBounds(2*w1p, 5*h1p, 150, 100);
+            this.add(img2);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        try {
+            InputStream stream3 = getClass().getResourceAsStream("/Visa.png");
+            img3  = new JLabel(new ImageIcon(ImageIO.read(stream3)));
+            img3.setBounds(16*w1p, 5*h1p, 148, 96);
+            this.add(img3);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         //Create text fields to input data
         cardTxtIn = new JTextField();
@@ -41,7 +73,7 @@ public class CreditInfo extends Page implements ActionListener {
 
         //Create labels
         title = new JLabel("Secure Credit Card Payment");
-        title.setBounds(41*w1p, 10*h1p, 20*w1p, 20*h1p);
+        title.setBounds(39*w1p, 13*h1p, 25*w1p, 20*h1p);
         title.setFont(titleFont);
 
         cardLabel = new JLabel("Credit Card Number");
@@ -49,7 +81,7 @@ public class CreditInfo extends Page implements ActionListener {
         cardLabel.setFont(font);
 
         nameLabel = new JLabel("Name on Card");
-        nameLabel.setBounds(52*w1p,31*h1p,10*w1p, 5*h1p);
+        nameLabel.setBounds(53*w1p,31*h1p,10*w1p, 5*h1p);
         nameLabel.setFont(font);
 
         expLabel = new JLabel("Expiration Date");
@@ -57,12 +89,12 @@ public class CreditInfo extends Page implements ActionListener {
         expLabel.setFont(font);
 
         cvvLabel = new JLabel("Security Code");
-        cvvLabel.setBounds(52*w1p, 46*h1p,10*w1p, 5*h1p);
+        cvvLabel.setBounds(53*w1p, 46*h1p,10*w1p, 5*h1p);
         cvvLabel.setFont(font);
 
         //Create payNow button
         payNow = new JButton("Pay Now");
-        payNow.setBounds(46*w1p, 65*h1p, 150, 50);//x axis, y axis, width, height
+        payNow.setBounds(45*w1p, 65*h1p, 150, 50);//x axis, y axis, width, height
         payNow.setBackground(Color.decode("#e06666"));
         payNow.setFont(buttonFont); 
         payNow.addActionListener(this);   

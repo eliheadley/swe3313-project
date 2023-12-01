@@ -96,12 +96,15 @@ public class LoginPage extends Page implements ActionListener {
             }
             if(matched){
                 if(user[6].toLowerCase().equals("customer")){
-                    currentOrder.setPhoneNumber(user[1]);
+                    currentOrder.setPhoneNumber(user[0]);
                     new PizzaMenu().showPizzaMenu(true);
+                    this.dispose();
                 }else if(user[6].toLowerCase().equals("employee")){
                     new EmployeePage().showEmployee(true);
+                    this.dispose();
                 }else if(user[6].toLowerCase().equals("manager")){
                     new ManagerPage().showManager(true);
+                    this.dispose();
                 }
             }else if(user != null && matched == false){
                 JOptionPane.showMessageDialog(null, "Invalid Password","Invalid Login", JOptionPane.ERROR_MESSAGE);

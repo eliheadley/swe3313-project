@@ -70,10 +70,15 @@ public class Order {
     // calculate order cost
     public double calcCost(){
         orderCost = 0;
-        orderCost += pizzas.calcCost();
-        orderCost += drinks.calcDrinkCost();
-        orderCost += sides.calcSideCost(); 
-        orderCost += tip;
+        if(this.getPizzas() != null){
+            orderCost += pizzas.calcCost();
+        }if(this.getDrinks() != null){
+            orderCost += drinks.calcDrinkCost();
+
+        }if(this.getSides() != null){
+            orderCost += sides.calcSideCost(); 
+        } 
+            orderCost += tip;
         return Math.round(orderCost * 100.0) / 100.0;
     }
 

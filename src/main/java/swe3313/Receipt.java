@@ -75,9 +75,15 @@ public class Receipt extends Page implements ActionListener{
         dMethod.setBounds(58*w1p, 18*h1p, 10*w1p, 6*h1p);
         dMethod.setFont(textFont);
         String s = "Estimated Time of Delivery";
-        if(currentOrder.deliveryMethod.equalsIgnoreCase("pickup")){
-            s = "Estimated Time for Pickup";
+        try{
+            if(currentOrder.deliveryMethod.equalsIgnoreCase("pickup")){
+                s = "Estimated Time for Pickup";
+            }
+        } catch(NullPointerException npe)
+        {
+            s = "";
         }
+        
         etod = new JLabel(s);
         etod.setBounds(74*w1p, 18*h1p, 15*w1p, 6*h1p);
         etod .setFont(textFont);
@@ -235,7 +241,12 @@ public class Receipt extends Page implements ActionListener{
         tipButton.addActionListener(this);
         
         //make order total label
-        total = new JLabel("Current Total: $" + currentOrder.getCost());
+        try{
+            total = new JLabel("Current Total: " + currentOrder.getCost());
+        } catch(NullPointerException npe){
+            total = new JLabel("");
+        }
+
         total.setFont(subTitleFont);
         total.setBounds(76*w1p, 81*h1p, 30*w1p, 3*h1p);
 

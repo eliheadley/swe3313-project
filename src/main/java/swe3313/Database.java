@@ -30,6 +30,7 @@ public class Database{
             return null;            
         }catch(Exception e){
             e.printStackTrace();
+            return null;
         }
         return querry;
     }

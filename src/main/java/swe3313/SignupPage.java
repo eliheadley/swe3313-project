@@ -129,10 +129,21 @@ public class SignupPage extends Page implements ActionListener{
     }
 
     private void validateInputs() throws InvalidInputException{
+        String phone = tPhoneNumber.getText();
+        try{
+            // check for exisitng phone number
+            Database db = new Database();
+            String[] s = db.getUser(phone);
+            if(!(s[0].isEmpty())){
+                throw new InvalidInputException("This Phone Number is already tied to an existing account");
+            }
+        }catch(NullPointerException npe){
+
+        }       
+
         //iterate through all 6 text fields
         for(int i = 0; i < 6; i++){
             // check phone number field
-            String phone = tPhoneNumber.getText();
             if(phone.length() != 10){
                 throw new InvalidInputException("Phone number must be exactly 10 characters long");
             }else if(phone.length() == 10){
@@ -141,11 +152,6 @@ public class SignupPage extends Page implements ActionListener{
                         throw new InvalidInputException("Phone Number should only have digits 0-9");
                     }
                 }
-            }
-
-            // check for exisitng
-            if((new Database().getUser(phone)) != null){
-                throw new InvalidInputException("This Phone Number is already tied to an existing account");
             }
 
             // check password field

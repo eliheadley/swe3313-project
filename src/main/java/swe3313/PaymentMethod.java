@@ -12,7 +12,7 @@ public class PaymentMethod extends Page implements ActionListener{
     JLabel img, title, label1, label2, line1, line2;
     JPanel payOnlinePanel, payInPersonPanel;
     JCheckBox credit, check, cash;
-    JButton confirm;
+    JButton confirm, backButton;
     Font buttonFont, textFont, titleFont, checkBoxFont;
 
     public PaymentMethod(){
@@ -26,10 +26,13 @@ public class PaymentMethod extends Page implements ActionListener{
         title.setBounds((6*w5p), h5p, 800, 60);
         title.setFont(titleFont);
 
-        /*  !!! Create logo using a icon
-        img = new JLabel(new ImageIcon("C:/Users/elihe/OneDrive/projects/swe3313-project/images/Mom & Pizza.png"));
-        img.setBounds((7*w5p), 3*h5p, 438, 438);
-        this.add(img); */
+        //back button
+        backButton = new JButton("Back");
+        backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
+        backButton.setBackground(Color.decode("#e06666"));
+        backButton.setFont(buttonFont);
+        backButton.addActionListener(this);
+        this.add(backButton);
 
         //Make first separator line
         line1 = new JLabel();
@@ -127,7 +130,7 @@ public class PaymentMethod extends Page implements ActionListener{
     @Override
      public void actionPerformed(ActionEvent e){
          // continue button
-         if(e.getActionCommand().equals("Back")){
+        if(e.getActionCommand().equals("Back")){
             new OrderSummary().showOrderSummary(true);
             this.dispose();
         }else if(e.getSource().equals(credit)){

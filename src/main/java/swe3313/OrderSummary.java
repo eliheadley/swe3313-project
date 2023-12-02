@@ -9,7 +9,7 @@ import javax.swing.border.Border;
 public class OrderSummary extends Page implements ActionListener{
     JLabel title, pizzaLabel, extrasLabel, qty1, each1, total1, line1, line2, 
     qty2, each2, total2;
-    JButton back, checkOut, edit1, edit2, edit3, inc1, inc2, inc3, dec1, dec2, dec3;
+    JButton checkOut, edit1, edit2, edit3, inc1, inc2, inc3, dec1, dec2, dec3;
     Font buttonFont, textFont, titleFont;
     JTextArea pizzaItem, drinkItem, sidesItem, pizzaQty, pizzaPrice, pizzaTotal, sideQty, sidePrice, sideTotal,
     drinkQty, drinkPrice, drinkTotal;
@@ -126,12 +126,6 @@ public class OrderSummary extends Page implements ActionListener{
         dec3.addActionListener(this);
         
 
-        // create back button
-        back = new JButton("Back");
-        back.setBounds(w5p, h5p, 10*w1p,7*h1p);
-        back.setBackground(Color.decode("#e06666"));
-        back.setFont(buttonFont);
-        back.addActionListener(this);
         // create confirm button
         checkOut = new JButton("Check Out");
         checkOut.setBounds(87*w1p,h5p,10*w1p, 7*h1p);
@@ -256,8 +250,7 @@ public class OrderSummary extends Page implements ActionListener{
              drinkItem.setText("");
         }
 
-        // add buttons to frame
-        this.add(back);
+        // add buttons to frameS
         this.add(checkOut);
         // add labels for first summary
         this.add(title);
@@ -292,11 +285,12 @@ public class OrderSummary extends Page implements ActionListener{
      public void actionPerformed(ActionEvent e){
         //Check out button
         if(e.getActionCommand().equals("Check Out")){
-            new PaymentMethod().showPaymentMethod(true);
-            this.dispose();
             if(Integer.parseInt(pizza.getQty()) == 0 && Integer.parseInt(sides.getSideQty()) == 0 && Integer.parseInt(drinks.getDrinkQty()) == 0){
                 JOptionPane.showMessageDialog(null, "Must have at least one item","Ivalide Selection", JOptionPane.ERROR_MESSAGE);
-            }
+            }else{
+                new PaymentMethod().showPaymentMethod(true);
+                this.dispose();
+            }            
         }else if(e.getSource().equals(inc1)){
             pizza.incQty();
             if(Integer.parseInt(pizza.getQty()) > 10){

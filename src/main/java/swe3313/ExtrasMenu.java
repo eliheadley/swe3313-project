@@ -273,67 +273,71 @@ public class ExtrasMenu extends Page implements ActionListener {
                   medium.setSelected(false);
                }
     
-        }else if(e.getActionCommand().equals("Pepsi")){
-            selectDrink("Pepsi");
-        }else if(e.getActionCommand().equals("Diet Pepsi")){
-            selectDrink("Diet Pepsi");
-        }else if(e.getActionCommand().equals("Orange")){
-            selectDrink("Orange");
-        }else if(e.getActionCommand().equals("Diet Orange")){
-            selectDrink("Diet Orange");
-        }else if(e.getActionCommand().equals("Root Beer")){
-            selectDrink("Root Beer");
-        }else if(e.getActionCommand().equals("Diet Root Beer")){
-            selectDrink("Diet Root Beer");
-        }else if(e.getActionCommand().equals("Sierra Mist")){
-            selectDrink("Sierra Mist");
-        }else if(e.getActionCommand().equals("Lemonade")){
-            selectDrink("Lemonade");
-        }else if(e.getActionCommand().equals("Add to Order")){
-           
-           
-            
+        }else if(e.getSource().equals(pepsi)){
+            dietPepsi.setSelected(false); 
+            orange.setSelected(false);
+            dietOrange.setSelected(false);
+            rootBeer.setSelected(false);
+            dietRB.setSelected(false);
+            sierraMist.setSelected(false);
+            lemonade.setSelected(false);
+        }else if(e.getSource().equals(dietPepsi)){
+            pepsi.setSelected(false); 
+            orange.setSelected(false);
+            dietOrange.setSelected(false);
+            rootBeer.setSelected(false);
+            dietRB.setSelected(false);
+            sierraMist.setSelected(false);
+            lemonade.setSelected(false);
+        } else if(e.getSource().equals(orange)){
+            dietPepsi.setSelected(false); 
+            pepsi.setSelected(false);
+            dietOrange.setSelected(false);
+            rootBeer.setSelected(false);
+            dietRB.setSelected(false);
+            sierraMist.setSelected(false);
+            lemonade.setSelected(false);
+        }else if(e.getSource().equals(dietOrange)){
+            dietPepsi.setSelected(false); 
+            orange.setSelected(false);
+            pepsi.setSelected(false);
+            rootBeer.setSelected(false);
+            dietRB.setSelected(false);
+            sierraMist.setSelected(false);
+            lemonade.setSelected(false);
+        } else if(e.getSource().equals(rootBeer)){
+            dietPepsi.setSelected(false); 
+            orange.setSelected(false);
+            dietOrange.setSelected(false);
+            pepsi.setSelected(false);
+            dietRB.setSelected(false);
+            sierraMist.setSelected(false);
+            lemonade.setSelected(false);
+        } else if(e.getSource().equals(dietRB)){
+            dietPepsi.setSelected(false); 
+            orange.setSelected(false);
+            dietOrange.setSelected(false);
+            rootBeer.setSelected(false);
+            pepsi.setSelected(false);
+            sierraMist.setSelected(false);
+            lemonade.setSelected(false);
+        } else if(e.getSource().equals(sierraMist)){
+            dietPepsi.setSelected(false); 
+            orange.setSelected(false);
+            dietOrange.setSelected(false);
+            rootBeer.setSelected(false);
+            dietRB.setSelected(false);
+            pepsi.setSelected(false);
+            lemonade.setSelected(false);
+        } else if(e.getSource().equals(lemonade)){
+            dietPepsi.setSelected(false); 
+            orange.setSelected(false);
+            dietOrange.setSelected(false);
+            rootBeer.setSelected(false);
+            dietRB.setSelected(false);
+            sierraMist.setSelected(false);
+            pepsi.setSelected(false);
         }
-    }
-
-    public void selectDrink(String s){
-        // p, dp, o, do, rb, drb, sm, l
-        boolean[] selected = {false, false, false, false, false, false, false, false};
-        switch (s.toLowerCase()){
-            case "pepsi":
-                selected[0] = true;
-                break;
-            case "diet pepsi":
-                selected[1] = true;
-                break;
-            case "orange":
-                selected[2] = true;
-                break;
-            case "diet orange":
-                selected[3] = true;
-                break;
-            case "root beer":
-                selected[4] = true;
-                break;
-            case "diet root beer":
-                selected[5] = true;
-                break;
-            case "sierra mist":
-                selected[6] = true;
-                break;
-            case "lemonade":
-                selected[7] = true;
-                break;
-        }
-        pepsi.setSelected(selected[0]);
-        dietPepsi.setSelected(selected[1]);
-        orange.setSelected(selected[2]);
-        dietOrange.setSelected(selected[3]);
-        rootBeer.setSelected(selected[4]);
-        dietRB.setSelected(selected[5]);
-        sierraMist.setSelected(selected[6]);
-        lemonade.setSelected(selected[7]);
-
     }
 
     public boolean validateSelection(){

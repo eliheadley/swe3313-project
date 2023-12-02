@@ -90,7 +90,7 @@ public class PrintedReceipt extends Page implements ActionListener{
         try{
             user = new Database().getUser(currentOrder.getPhoneNumber());
             String name = "";
-            name += user[2];
+            name += user[2] + " ";
             name += user[3];
             username = new JLabel(name);
             username.setBounds(12*w1p, 26*h1p, 10*w1p, 6*h1p);
@@ -102,9 +102,9 @@ public class PrintedReceipt extends Page implements ActionListener{
             userAddress.setBounds(36*w1p, 27*h1p, 20*w1p, 9*h1p);
 
         }catch(NullPointerException npe){
-            username = new JLabel("Test");
-            phoneNumber = new JLabel("Test");
-            userAddress = new JTextArea("Test");
+            username = new JLabel("");
+            phoneNumber = new JLabel("");
+            userAddress = new JTextArea("");
         }
         userDMethod = new JLabel(currentOrder.deliveryMethod);
         userDMethod.setBounds(60*w1p, 26*h1p, 15*w1p, 6*h1p);

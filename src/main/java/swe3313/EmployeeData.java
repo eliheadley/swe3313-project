@@ -169,7 +169,7 @@ public class EmployeeData extends Page implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getActionCommand().equals("Back")){
-            new ManagerPage().showManager(true);
+            new EmployeePage().showEmployee(true);
             this.dispose();
         }else if(e.getSource().equals(veiwEmployeeData)){
             Object[][] currentEmployees = {

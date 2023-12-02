@@ -14,11 +14,11 @@ public class Receipt extends Page implements ActionListener{
     JLabel img, title, mainInfo, address, otherInfo, label1, label2, label3, name, number, dMethod, etod, username, phoneNumber, userDMethod, userEtod, line1, line2, line3, tip, total, signature, date;
     JTextArea userAddress;
     JPanel infoPanel, orderPanel;
-    Font buttonFont, subTitleFont, textFont, titleFont, infoFont;
+    Font subTitleFont, textFont, titleFont, infoFont;
     JTextArea pizzaItem, drinkItem, sidesItem, pizzaQty, pizzaPrice, pizzaTotal, sideQty, sidePrice, sideTotal,
     drinkQty, drinkPrice, drinkTotal;
     JTextField tipTxt, sigTxt;
-    JButton backButton, tipButton;
+    JButton tipButton;
     Drink drinks;
     Sides sides;
     Pizza pizza;
@@ -30,20 +30,11 @@ public class Receipt extends Page implements ActionListener{
         textFont = new Font("Impact", Font.PLAIN, 20);
         titleFont = new Font("Impact", Font.BOLD, 52);
         infoFont = new Font("Impact", Font.PLAIN, 14);
-        buttonFont = new Font("Impact", Font.PLAIN, 20);
 
         // create title
         title = new JLabel("Mom and Pop's Pizza Shop Receipt");
         title.setBounds(30*w1p, 5*h1p, 60*w1p, 8*h1p);
         title.setFont(titleFont);
-
-        //back button
-        backButton = new JButton("Back");
-        backButton.setBounds(w5p, h5p, 10*w1p,7*h1p);
-        backButton.setBackground(Color.decode("#e06666"));
-        backButton.setFont(buttonFont);
-        backButton.addActionListener(this);
-        this.add(backButton);
 
         // make labels for restuaurant info
         mainInfo = new JLabel("680 Arntson Rd, Suite 161 Marietta, GA 30060");
@@ -374,9 +365,6 @@ public class Receipt extends Page implements ActionListener{
                 JOptionPane.showMessageDialog(this, iie.getMessage(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
             }
             
-        }else if(e.getActionCommand().equals("Back")){
-            new DeliveryMethod().showDeliveryMethod(true);
-            this.dispose();
         }
 
     }
